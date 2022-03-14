@@ -2,7 +2,7 @@
 
 <div align="center">
   <a href="https://github.com/it-at-m">
-    <img src="/images/RIT-Logo_Muenchen.svg" alt="Logo" height="200">
+    <img src="/images/itm_logo.png" alt="Logo" height="200">
   </a>
 </div>
 
@@ -18,7 +18,3 @@
 
 ### DigiWF Workflow integration platform  
 Informationen: https://digiwf.muenchendigital.io/
-
-## Folge uns
-
-![Twitter Follow](https://img.shields.io/twitter/follow/MuenchenDigital?style=social)
