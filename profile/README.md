@@ -19,6 +19,9 @@
 ### DigiWF Workflow integration platform  
 Informationen: https://digiwf.muenchendigital.io/
 
+### Indoor Positioning System - Epitaph
+Repo: https://github.com/it-at-m/epitaph_ips
+
 ## Neues Projekt anlegen
 
 Um ein neues Repository initial aufzusetzen, wird ein [Template (englisch)](https://github.com/it-at-m/oss-repository-en-template) zur Verfügung gestellt. Einfach in diesem Repository auf "use this template" klicken und dann die gewohnten Metadaten befüllen.
