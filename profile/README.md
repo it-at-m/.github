@@ -6,7 +6,7 @@
   </a>
 </div>
 
-<h3 align="center">it@m Github Organisations Seite</h3>
+<h3 align="center">it@M Github Organisations Seite</h3>
 
 <p align="center">
   Hier finden Sie alle unsere Open Source Projekte.
