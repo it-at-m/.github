@@ -17,7 +17,7 @@
 ## Projekte
 
 ### DigiWF Workflow integration platform  
-Informationen: https://digiwf.muenchendigital.io/
+Informationen: https://digiwf.oss.muenchen.de/
 
 ### Indoor Positioning System - Epitaph
 Repo: https://github.com/it-at-m/epitaph_ips
