@@ -16,11 +16,13 @@
 
 ## Projekte
 
-### DigiWF Workflow integration platform  
-Informationen: https://digiwf.oss.muenchen.de/
+### DigiWF Workflow integration platform
 
-### Indoor Positioning System - Epitaph
-Repo: https://github.com/it-at-m/epitaph_ips
+__DigiWF__ ist die zentrale Workflow-Automatisierungs- und Integrationsplattform auf Basis des freien Prozess-Frameworks Camunda:[digiwf.oss.muenchen.de](https://digiwf.oss.muenchen.de)
+
+### Epitaph IPS Indoor Positioning Library
+
+Epitaph ist eine Softwarelibrary, um Benutzer in Gebäuden zu positionieren. Das Projekt soll nur zur Berechnung der Position auf dem Gerät des Benutzers verwendet werden: [github.com/it-at-m/epitaph_ips](https://github.com/it-at-m/epitaph_ips)
 
 ## Neues Projekt anlegen
 
