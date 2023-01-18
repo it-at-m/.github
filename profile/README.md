@@ -6,7 +6,7 @@ Open Source-Projekte, die von der Landeshauptstadt München entwickelt, beauftra
 
 ### DigiWF Workflow Integration Platform
 
-__DigiWF__ ist die zentrale Workflow-Automatisierungs- und Integrationsplattform auf Basis des freien Prozess-Frameworks Camunda:[digiwf.oss.muenchen.de](https://digiwf.oss.muenchen.de)
+__DigiWF__ ist die zentrale Workflow-Automatisierungs- und Integrationsplattform auf Basis des freien Prozess-Frameworks Camunda: [digiwf.oss.muenchen.de](https://digiwf.oss.muenchen.de)
 
 ### Epitaph IPS Indoor Positioning Library
 
