@@ -1,4 +1,6 @@
+## Open Source in der Landeshauptstadt München
 
+Open Source-Projekte, die von der Landeshauptstadt München entwickelt, beauftragt oder gefördert werden.
 
 ## Projekte
 
