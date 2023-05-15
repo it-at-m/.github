@@ -13,4 +13,4 @@ The technologies we use and how we want to work: [documentation and instructions
 
 ---
 
-Made with 💛 in munich
+Made with 💛 in Munich
