@@ -25,6 +25,10 @@ jobs:
           java-version: "17"
           distribution: "temurin"
           cache: "maven"
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
       - name: Maven Release
         run: |
            git config --global user.email "github-actions@github.com"
