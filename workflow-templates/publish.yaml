@@ -1,12 +1,6 @@
 name: Build and publish an image
 
-on: # defining on which triggers this action should run
-  workflow_dispatch: # enable manual triggering of this action
-    inputs: # define the variables/inputs a user can set while triggering this action
-      input:
-        description: 'Example input'
-        required: true
-        default: 'none'
+on: [workflow_dispatch]
 
 env:
   # Use docker.io for Docker Hub if empty
