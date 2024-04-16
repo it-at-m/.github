@@ -28,9 +28,12 @@ jobs:
           java-version: "17"
           distribution: "temurin"
           cache: "maven"
-
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
       - name: Build with Maven
-        run: mvn -B verify -f pom.xml -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN
+        run: mvn -B install -f pom.xml -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
