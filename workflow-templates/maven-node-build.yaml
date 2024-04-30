@@ -62,6 +62,7 @@ jobs:
          retention-days: 5    
   build-image:
      needs: build-maven
+     if: github.ref == 'refs/heads/main'
      runs-on: ubuntu-latest
      steps:
       - name: Checkout code
