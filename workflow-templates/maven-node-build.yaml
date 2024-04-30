@@ -1,14 +1,26 @@
 name: Compliance check and build test
 
+
+env:
+     JAVA_VERSION: 17
+     NODE_VERSION: 20
+     APP_PATH: "." # example ./backend for monorepos
+     TZ: Europe/Berlin # timezone
+       # Use docker.io for Docker Hub if empty
+     REGISTRY: ghcr.io
+     # github.repository as <account>/<repo>
+     IMAGE_NAME: ${{ github.repository }}
+
+  
 on: # defining on which triggers this action should run
   push:
     branches:
       # define on push of which branches should this action be run
     paths:
-      # define the concrete paths on which a change triggers this action, e.g. backend/**
+     - "**"     # define the concrete paths on which a change triggers this action, e.g. backend/**
   pull_request: # trigger this action also on Pull Requests
     types: [ opened, reopened ]
-
+     
 jobs:
   compliance:
     runs-on: ubuntu-latest
@@ -30,15 +42,51 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK 17
+      - name: Set up JDK 
         uses: actions/setup-java@v4
         with:
-          java-version: "17"
+          java-version: ${{ env.JAVA_VERSION }}
           distribution: "temurin"
           cache: "maven"
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version:  ${{ env.NODE_VERSION }}
       - name: Build with Maven
-        run: mvn --update-snapshots -f pom.xml install
+        run: mvn --update-snapshots -f ${{env.APP_PATH}}/pom.xml install
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v4
+        with:
+         name: target
+         path: "**/target"
+         retention-days: 5    
+  build-image:
+     needs: build-maven
+     runs-on: ubuntu-latest
+     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Download a single artifact
+        uses: actions/download-artifact@v4
+        with:
+           name: target
+      - name: Login to Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+
+      - name: Build and push image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
