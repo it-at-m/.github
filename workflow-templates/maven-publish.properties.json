@@ -1,4 +1,0 @@
-{
-    "name": "Maven Publish",
-    "description": "Creates a Dockerimage with mvn install"
-}
