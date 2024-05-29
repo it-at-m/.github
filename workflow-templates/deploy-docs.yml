@@ -32,6 +32,9 @@ jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory:  ${{ env.SUB_PATH }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -43,15 +46,12 @@ jobs:
           node-version: 20
           cache: npm # or pnpm / yarn
           cache-dependency-path: "${{ env.SUB_PATH }}/package-lock.json"
-          
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Install dependencies
         run: npm ci # or pnpm install / yarn install / bun install
-        working-directory: ${{ env.SUB_PATH }}
       - name: Build with VitePress
         run: npm run docs:build # or pnpm docs:build / yarn docs:build / bun run docs:build
-        working-directory: ${{ env.SUB_PATH }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
