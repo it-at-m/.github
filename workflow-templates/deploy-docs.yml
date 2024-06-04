@@ -3,7 +3,7 @@
 name: Deploy VitePress site to Pages
 
 env:
-   SUB_PATH: "./docs"
+  SUB_PATH: "./docs"
 
 on:
   # Runs on pushes targeting the `main` branch. Change this to `master` if you're
@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory:  ${{ env.SUB_PATH }}
+        working-directory: ${{ env.SUB_PATH }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4

@@ -1,4 +1,4 @@
 {
-    "name": "Deploy docs github pages",
-    "description": "Deploys the docs folder in github pages"
+  "name": "Deploy docs github pages",
+  "description": "Deploys the docs folder in github pages"
 }
