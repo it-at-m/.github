@@ -2,7 +2,7 @@ name: Compliance check and build test
 
 env:
   JAVA_VERSION: 17
-  ENABLE_NODE: false  # true or false brauch man damit der NPM-Cache funktioniert
+  ENABLE_NODE: false # true or false brauch man damit der NPM-Cache funktioniert
   NODE_VERSION: 20
   APP_PATH: "/sps-backend" # example "/backend" for monorepos or "" for multi repos
   TZ: "Europe/Berlin" # timezone
@@ -52,7 +52,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "npm"
-          cache-dependency-path: "${{env.APP_PATH}}/frontend/package-lock.json" 
+          cache-dependency-path: "${{env.APP_PATH}}/frontend/package-lock.json"
       - name: Build with Maven
         run: mvn --update-snapshots -f .${{env.APP_PATH}}/pom.xml install
       - name: "Upload Artifact"
