@@ -82,7 +82,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ github.repository }}${{ github.event.inputs.APP_PATH }}:${{ github.event.inputs.releaseVersion }}
+          images: ${{ env.REGISTRY }}/${{ github.repository }}${{ github.event.inputs.APP_PATH }}
           tags: |
             type=semver,pattern={{version}},value=${{ github.event.inputs.releaseVersion }}
       - name: Build and push image
