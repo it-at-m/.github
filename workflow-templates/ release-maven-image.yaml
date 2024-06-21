@@ -1,10 +1,10 @@
 name: release-maven-image
 env:
-     JAVA_VERSION: 17
-     NODE_VERSION: 20
-     REGISTRY: ghcr.io
-     TZ: Europe/Berlin # timezone
-     
+  JAVA_VERSION: 17
+  NODE_VERSION: 20
+  REGISTRY: ghcr.io
+  TZ: Europe/Berlin # timezone
+
 on:
   workflow_dispatch:
     inputs:
@@ -20,9 +20,10 @@ on:
         type: choice
         description: Service-Name
         required: true
-        options: 
-        - /sps-backend  # todo: muss angepasst werden. eigenen Ordner verwenden
-        - /sps-frontend # todo: muss angepasst werden. eigenen Ordner verwenden
+        options:
+          - /sps-backend # todo: muss angepasst werden. eigenen Ordner verwenden
+          - /sps-frontend # todo: muss angepasst werden. eigenen Ordner verwenden
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -38,39 +39,39 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: "temurin"
           cache: "maven"
-          cache-dependency-path: ".${{ github.event.inputs.APP_PATH}}/pom.xml" 
+          cache-dependency-path: ".${{ github.event.inputs.APP_PATH}}/pom.xml"
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version:  ${{ env.NODE_VERSION }}
+          node-version: ${{ env.NODE_VERSION }}
       - name: Maven Release Step
         id: maven-release-step
         run: |
-           git config --global user.email "github-actions@github.com"
-           git config --global user.name "GitHub Actions"
-           MVN_ARTIFACT_ID=$(mvn -f .${{github.event.inputs.APP_PATH}}/pom.xml org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.artifactId -q -DforceStdout)
-           echo $MVN_ARTIFACT_ID
-           echo "MVN_ARTIFACT_ID=$MVN_ARTIFACT_ID" >> $GITHUB_OUTPUT
-           mvn release:prepare -f .${{github.event.inputs.APP_PATH}}/pom.xml -B -DreleaseVersion=${{ github.event.inputs.releaseVersion }} -DdevelopmentVersion=${{ github.event.inputs.developmentVersion }}
-           mvn release:perform -f .${{github.event.inputs.APP_PATH}}/pom.xml -Darguments="-Dmaven.deploy.skip=true"
-      - name: 'Upload Artifact'
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+          MVN_ARTIFACT_ID=$(mvn -f .${{github.event.inputs.APP_PATH}}/pom.xml org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.artifactId -q -DforceStdout)
+          echo $MVN_ARTIFACT_ID
+          echo "MVN_ARTIFACT_ID=$MVN_ARTIFACT_ID" >> $GITHUB_OUTPUT
+          mvn release:prepare -f .${{github.event.inputs.APP_PATH}}/pom.xml -B -DreleaseVersion=${{ github.event.inputs.releaseVersion }} -DdevelopmentVersion=${{ github.event.inputs.developmentVersion }}
+          mvn release:perform -f .${{github.event.inputs.APP_PATH}}/pom.xml -Darguments="-Dmaven.deploy.skip=true"
+      - name: "Upload Artifact"
         uses: actions/upload-artifact@v4
         with:
-         name: target
-         path: "**/target"
-         retention-days: 5    
+          name: target
+          path: "**/target"
+          retention-days: 5
         env:
-           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   build-image:
-     needs: release
-     runs-on: ubuntu-latest
-     steps:
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Download a single artifact
         uses: actions/download-artifact@v4
         with:
-           name: target
+          name: target
       - name: Login to Registry
         uses: docker/login-action@v3
         with:
@@ -88,16 +89,15 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v4
         with:
-          context:  .${{ github.event.inputs.APP_PATH }}
+          context: .${{ github.event.inputs.APP_PATH }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-           
   create-github-release:
-     needs: release
-     runs-on: ubuntu-latest
-     steps:
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
       - name: Create GitHub Release
         id: create_release
         uses: softprops/action-gh-release@v2
