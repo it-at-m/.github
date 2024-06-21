@@ -20,8 +20,8 @@ on:
         type: choice
         description: Service-Name
         options: 
-        - /sps-backend
-        - /sps-frontend
+        - /sps-backend  # todo: muss angepasst werden. eigenen Ordner verwenden
+        - /sps-frontend # todo: muss angepasst werden. eigenen Ordner verwenden
 jobs:
   release:
     runs-on: ubuntu-latest
