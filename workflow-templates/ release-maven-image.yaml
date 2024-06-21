@@ -90,7 +90,6 @@ jobs:
         with:
           context:  .${{ github.event.inputs.APP_PATH }}
           push: true
-          # tags:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
