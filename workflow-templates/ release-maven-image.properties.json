@@ -1,0 +1,4 @@
+{
+  "name": "release-maven-image",
+  "description": "Makes a Maven-Release, with Github-Release and Docker-Image"
+}
