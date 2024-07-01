@@ -1,0 +1,47 @@
+  build-image:
+    reusable_workflow_job:
+     inputs:
+      registry:
+        required: true
+        type: string
+      registry-password:
+        required: true
+        type: string
+      registry-username:
+        required: true
+        type: string
+      app-path:
+        required: true
+        type: string
+        
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Download a single artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: target
+      - name: Login to Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ inputs.registry }}
+          username: ${{ inputs.registry-username }}
+          password: ${{ inputs.registry-password }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ inputs.registry }}/${{ github.repository }}${{ inputs.app-path }}
+          tags: |
+            type=raw,value=latest
+          labels: |
+            org.opencontainers.image.description=Siehe ${{ github.server_url }}/${{ github.repository }}
+      - name: Build and push image
+        uses: docker/build-push-action@v4
+        with:
+          context: .${{ inputs.app-path }}
+          push: true          
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
