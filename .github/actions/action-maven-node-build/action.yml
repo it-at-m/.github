@@ -27,14 +27,14 @@ runs:
         java-version: ${{ inputs.java-version }}
         distribution: "temurin"
         cache: "maven"
-        cache-dependency-path: ".${{env.APP_PATH}}/pom.xml"
+        cache-dependency-path: "${{env.APP_PATH}}/pom.xml"
     - name: Set up Node.js
       if: ${{ inputs.enable-node == 'true' }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ inputs }}
         cache: "npm"
-        cache-dependency-path: ".${{inputs.app-path}}/**/package-lock.json"
+        cache-dependency-path: "${{inputs.app-path}}/**/package-lock.json"
     - name: Build with Maven
       run: mvn --update-snapshots -f .${{inputs.app-path}}/pom.xml install
       shell: bash
