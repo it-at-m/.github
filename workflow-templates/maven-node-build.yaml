@@ -86,6 +86,8 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ github.repository }}${{ env.APP_PATH }}
           tags: |
             type=raw,value=latest
+          labels: |
+            org.opencontainers.image.description=Siehe ${{ github.server_url }}/${{ github.repository }}
       - name: Build and push image
         uses: docker/build-push-action@v4
         with:
