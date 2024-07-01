@@ -1,5 +1,4 @@
-name: 'Hello World'
-description: 'Greet someone'
+name: 'Build Docker Image'
 
 inputs:
       registry:
