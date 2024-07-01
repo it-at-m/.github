@@ -1,6 +1,8 @@
 name: Compliance check and build test
 
-
+env:
+    TZ: Europe/Berlin # timezone
+    
 on:
   workflow_call:
      inputs:
