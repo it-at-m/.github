@@ -7,10 +7,19 @@ on:
       registry:
         required: true
         type: string
-
       registry-username:
         required: true
         type: string
+      image-tags:
+         required: false
+         default: |
+            type=raw,value=latest
+         type: string
+      image-labels:
+          required: false
+          default: |
+           org.opencontainers.image.description=Siehe ${{ github.server_url }}/${{ github.repository }}
+          type: string
       app-path:
         required: true
         type: string
@@ -40,10 +49,8 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ inputs.registry }}/${{ github.repository }}${{ inputs.app-path }}
-          tags: |
-            type=raw,value=latest
-          labels: |
-            org.opencontainers.image.description=Siehe ${{ github.server_url }}/${{ github.repository }}
+          tags: ${{inputs.image-tags}}
+          labels: ${{inputs.image-labels}}
       - name: Build and push image
         uses: docker/build-push-action@v4
         with:
