@@ -2,6 +2,7 @@ name: Compliance check and build test
 
 env:
   app-path: "/sps-backend" # example "/backend" for monorepos or "" for multi repos
+  enable-node: false # true
 
 on: # defining on which triggers this action should run
   push:
@@ -20,6 +21,7 @@ jobs:
       - uses: it-at-m/.github/.github/actions/action-maven-node-build@reuseable-workflow
         with:
           app-path: "${{ env.app-path }}"
+          enable-node: "${{ env.enable-node }}"
 
   build-image:
     runs-on: ubuntu-latest
