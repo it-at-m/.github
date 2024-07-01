@@ -7,15 +7,16 @@ on:
       registry:
         required: true
         type: string
-      registry-password:
-        required: true
-        type: string
+
       registry-username:
         required: true
         type: string
       app-path:
         required: true
         type: string
+     secrets:
+      registry-password:
+        required: true
         
 jobs:
   build-image:
