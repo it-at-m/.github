@@ -21,9 +21,9 @@ inputs:
       app-path:
         required: true
         type: string
-     secrets:
       registry-password:
         required: true
+        type: string
 
 
         
@@ -41,7 +41,7 @@ runs:
         with:
           registry: ${{ inputs.registry }}
           username: ${{ inputs.registry-username }}
-          password: ${{ secrets.registry-password }}
+          password: ${{ inputs.registry-password }}
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
