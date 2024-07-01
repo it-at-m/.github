@@ -28,8 +28,9 @@ inputs:
 
         
 runs:
-
+    using: "composite"
     steps:
+
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Download a single artifact
