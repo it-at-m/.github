@@ -1,5 +1,8 @@
-  build-image:
-    reusable_workflow_job:
+name: Reusable workflow example
+
+
+on:
+  workflow_call:
      inputs:
       registry:
         required: true
@@ -14,6 +17,8 @@
         required: true
         type: string
         
+jobs:
+  build-image:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
