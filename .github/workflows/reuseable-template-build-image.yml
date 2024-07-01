@@ -1,9 +1,8 @@
 name: Build Docker Image
 
-
 on:
   workflow_call:
-     inputs:
+    inputs:
       registry:
         required: true
         type: string
@@ -11,22 +10,22 @@ on:
         required: true
         type: string
       image-tags:
-         required: false
-         default: |
-            type=raw,value=latest
-         type: string
+        required: false
+        default: |
+          type=raw,value=latest
+        type: string
       image-labels:
-          required: false
-          default: |
-           org.opencontainers.image.description=Siehe ${{ github.server_url }}/${{ github.repository }}
-          type: string
+        required: false
+        default: |
+          org.opencontainers.image.description=Siehe ${{ github.server_url }}/${{ github.repository }}
+        type: string
       app-path:
         required: true
         type: string
-     secrets:
+    secrets:
       registry-password:
         required: true
-        
+
 jobs:
   build-image:
     runs-on: ubuntu-latest
@@ -55,6 +54,6 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .${{ inputs.app-path }}
-          push: true          
+          push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
