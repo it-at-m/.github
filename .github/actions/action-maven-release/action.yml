@@ -19,7 +19,8 @@ inputs:
     required: true
     type: string
 outputs:
-  MVN_ARTIFACT_ID: ${{ steps.maven-release-step.outputs.MVN_ARTIFACT_ID }}
+  value:
+    MVN_ARTIFACT_ID: ${{ steps.maven-release-step.outputs.MVN_ARTIFACT_ID }}
 
 runs:
   using: "composite"
