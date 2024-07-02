@@ -32,7 +32,7 @@ runs:
       if: ${{ inputs.enable-node == 'true' }}
       uses: actions/setup-node@v4
       with:
-        node-version: ${{ inputs }}
+        node-version: ${{ inputs.node-version }}
         cache: "npm"
         cache-dependency-path: ".${{inputs.app-path}}/**/package-lock.json"
     - name: Build with Maven
