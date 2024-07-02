@@ -43,6 +43,7 @@ runs:
         node-version: ${{ inputs.node-version }}
     - name: Maven Release Step
       id: maven-release-step
+      shell: bash
       run: |
         git config --global user.email "github-actions@github.com"
         git config --global user.name "GitHub Actions"
