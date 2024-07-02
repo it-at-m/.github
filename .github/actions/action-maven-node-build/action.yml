@@ -27,7 +27,7 @@ runs:
         java-version: ${{ inputs.java-version }}
         distribution: "temurin"
         cache: "maven"
-        cache-dependency-path: ".${{env.APP_PATH}}/pom.xml"
+        cache-dependency-path: ".${{env.app-path}}/pom.xml"
     - name: Set up Node.js
       if: ${{ inputs.enable-node == 'true' }}
       uses: actions/setup-node@v4
