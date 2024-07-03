@@ -24,9 +24,11 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       MVN_ARTIFACT_ID: ${{ steps.maven-release-step.outputs.MVN_ARTIFACT_ID }}
+    env:
+      TZ: Europe/Berlin # timezone
     steps:
       - id: maven-release-step
-        uses: it-at-m/.github/.github/actions/action-maven-release@reuseable-workflow
+        uses: it-at-m/.github/.github/actions/action-maven-release@main
         with:
           app-path: "${{ github.event.inputs.app-path }}"
           releaseVersion: "${{ github.event.inputs.releaseVersion }}"
@@ -36,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: release-maven
     steps:
-      - uses: it-at-m/.github/.github/actions/action-build-image@reuseable-workflow
+      - uses: it-at-m/.github/.github/actions/action-build-image@main
         with:
           app-path: "${{ github.event.inputs.app-path }}"
           registry-password: ${{ secrets.GITHUB_TOKEN }}

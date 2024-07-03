@@ -24,8 +24,6 @@ outputs:
 
 runs:
   using: "composite"
-  #env:
-  #  TZ: Europe/Berlin # timezone
   steps:
     # Checkout source code, set up Java, etc. Then...
     - name: Checkout code

@@ -17,8 +17,10 @@ on: # defining on which triggers this action should run
 jobs:
   build-maven:
     runs-on: ubuntu-latest
+    env:
+      TZ: Europe/Berlin # timezone
     steps:
-      - uses: it-at-m/.github/.github/actions/action-maven-node-build@reuseable-workflow
+      - uses: it-at-m/.github/.github/actions/action-maven-node-build@main
         with:
           app-path: "${{ env.app-path }}"
           enable-node: "${{ env.enable-node }}"
@@ -28,7 +30,7 @@ jobs:
     needs: build-maven
     if: github.ref == 'refs/heads/main'
     steps:
-      - uses: it-at-m/.github/.github/actions/action-build-image@reuseable-workflow
+      - uses: it-at-m/.github/.github/actions/action-build-image@main
         with:
           app-path: "${{ env.app-path }}"
           registry-password: ${{ secrets.GITHUB_TOKEN }}
