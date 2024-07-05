@@ -19,5 +19,5 @@ allow_dependencies_licenses:
   - pkg:npm/node-forge
   # false positive: only used while build but not part of the software
   - pkg:maven/com.puppycrawl.tools/checkstyle
-  # false positive: couldn't parse license but is MIT
+  # false positive: couldn't parse license but is Apache License 2.0
   - pkg:maven/com.hazelcast/hazelcast-spring
