@@ -1,0 +1,58 @@
+name: Maven Release
+
+inputs:
+  java-version:
+    required: false
+    default: 17
+    type: string
+  node-version:
+    required: false
+    default: 20
+    type: string
+  app-path:
+    required: true
+    type: string
+  releaseVersion:
+    required: true
+    type: string
+  developmentVersion:
+    required: true
+    type: string
+outputs:
+  MVN_ARTIFACT_ID:
+    value: ${{ steps.maven-release-step.outputs.MVN_ARTIFACT_ID }}
+
+runs:
+  using: "composite"
+  steps:
+    # Checkout source code, set up Java, etc. Then...
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        java-version: ${{ inputs.java-version }}
+        distribution: "temurin"
+        cache: "maven"
+        cache-dependency-path: ".${{ inputs.app-path}}/pom.xml"
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+    - name: Maven Release Step
+      id: maven-release-step
+      shell: bash
+      run: |
+        git config --global user.email "github-actions@github.com"
+        git config --global user.name "GitHub Actions"
+        MVN_ARTIFACT_ID=$(mvn -f .${{inputs.app-path}}/pom.xml org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.artifactId -q -DforceStdout)
+        echo $MVN_ARTIFACT_ID
+        echo "MVN_ARTIFACT_ID=$MVN_ARTIFACT_ID" >> $GITHUB_OUTPUT
+        mvn release:prepare -f .${{inputs.app-path}}/pom.xml -B -DreleaseVersion=${{ inputs.releaseVersion }} -DdevelopmentVersion=${{ inputs.developmentVersion }}
+        mvn release:perform -f .${{inputs.app-path}}/pom.xml -Darguments="-Dmaven.deploy.skip=true"
+    - name: "Upload Artifact"
+      uses: actions/upload-artifact@v4
+      with:
+        name: target
+        path: "**/target"
+        retention-days: 5

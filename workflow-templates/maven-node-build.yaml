@@ -1,97 +1,38 @@
 name: Compliance check and build test
 
 env:
-  JAVA_VERSION: 17
-  ENABLE_NODE: false # true or false brauch man damit der NPM-Cache funktioniert
-  NODE_VERSION: 20
-  APP_PATH: "/sps-backend" # example "/backend" for monorepos or "" for multi repos
-  TZ: "Europe/Berlin" # timezone
-  # Use docker.io for Docker Hub if empty
-  REGISTRY: ghcr.io
+  app-path: "/sps-backend" # example "/backend" for monorepos or "" for multi repos
+  enable-node: false # true
 
 on: # defining on which triggers this action should run
   push:
     branches:
       # define on push of which branches should this action be run
     paths:
-      - "**" # define the concrete paths on which a change triggers this action, e.g. backend/**
+      - "sps-backend/**" # define the concrete paths on which a change triggers this action, e.g. backend/**
+      - ".github/workflows/**" # define the concrete paths on which a change triggers this action, e.g. backend/**
   pull_request: # trigger this action also on Pull Requests
     types: [opened, reopened]
 
 jobs:
-  compliance:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Advance Security Policy as Code
-        uses: advanced-security/policy-as-code@v2.7.1
-        with:
-          policy: it-at-m/policy-as-code
-          policy-path: default.yaml
-          token: ${{ secrets.GITHUB_TOKEN }}
-          argvs: "--disable-dependabot --disable-secret-scanning --disable-code-scanning --display"
-
   build-maven:
-    needs: compliance
     runs-on: ubuntu-latest
+    env:
+      TZ: Europe/Berlin # timezone
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up JDK
-        uses: actions/setup-java@v4
+      - uses: it-at-m/.github/.github/actions/action-maven-node-build@main
         with:
-          java-version: ${{ env.JAVA_VERSION }}
-          distribution: "temurin"
-          cache: "maven"
-          cache-dependency-path: ".${{env.APP_PATH}}/pom.xml"
-      - name: Set up Node.js
-        if: ${{ env.ENABLE_NODE == 'true' }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: "npm"
-          cache-dependency-path: "${{env.APP_PATH}}/frontend/package-lock.json"
-      - name: Build with Maven
-        run: mvn --update-snapshots -f .${{env.APP_PATH}}/pom.xml install
-      - name: "Upload Artifact"
-        uses: actions/upload-artifact@v4
-        with:
-          name: target
-          path: "**/target"
-          retention-days: 5
+          app-path: "${{ env.app-path }}"
+          enable-node: "${{ env.enable-node }}"
+
   build-image:
+    runs-on: ubuntu-latest
     needs: build-maven
     if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Download a single artifact
-        uses: actions/download-artifact@v4
+      - uses: it-at-m/.github/.github/actions/action-build-image@main
         with:
-          name: target
-      - name: Login to Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.REGISTRY }}/${{ github.repository }}${{ env.APP_PATH }}
-          tags: |
-            type=raw,value=latest
-          labels: |
-            org.opencontainers.image.description=Siehe ${{ github.server_url }}/${{ github.repository }}
-      - name: Build and push image
-        uses: docker/build-push-action@v4
-        with:
-          context: .${{ env.APP_PATH }}
-          push: true          
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          app-path: "${{ env.app-path }}"
+          registry-password: ${{ secrets.GITHUB_TOKEN }}
+          registry: ghcr.io
+          registry-username: ${{ github.actor }}
