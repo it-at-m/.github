@@ -1,28 +1,36 @@
 name: "Build Docker Image"
+description: "Builds and pushes a docker image"
 
 inputs:
   registry:
+    description: "Image registry to push image to"
     required: true
-    type: string
+    default: ghcr.io
   registry-username:
+    description: "Username to authenticate against image registry"
     required: true
-    type: string
+ registry-password:
+    description: "Username to authenticate against image registry"
+    required: true
   image-tags:
+    description: "Tags to tag image with"
     required: false
     default: |
       type=raw,value=latest
-    type: string
   image-labels:
+    description: "Labels to add to image"
     required: false
     default: |
-      org.opencontainers.image.description=Siehe ${{ github.server_url }}/${{ github.repository }}
-    type: string
+      org.opencontainers.image.description=See ${{ github.server_url }}/${{ github.repository }}
   app-path:
     required: true
     type: string
-  registry-password:
+  path:
+    description: "Path to the Dockerfile to build image from"
     required: true
-    type: string
+  image-name:
+    description: "Name to give the image"
+    required: true
 
 runs:
   using: "composite"
@@ -44,13 +52,13 @@ runs:
       id: meta
       uses: docker/metadata-action@v5
       with:
-        images: ${{ inputs.registry }}/${{ github.repository }}${{ inputs.app-path }}
+        images: "${{ inputs.registry }}/${{ github.repository }}/${{ inputs.image-name }}"
         tags: ${{inputs.image-tags}}
         labels: ${{inputs.image-labels}}
     - name: Build and push image
       uses: docker/build-push-action@v6
       with:
-        context: .${{ inputs.app-path }}
+        context: ./${{ inputs.path }}
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
