@@ -9,7 +9,7 @@ inputs:
   registry-username:
     description: "Username to authenticate against image registry"
     required: true
- registry-password:
+  registry-password:
     description: "Username to authenticate against image registry"
     required: true
   image-tags:
