@@ -33,7 +33,7 @@ jobs:
       - uses: it-at-m/.github/.github/actions/action-build-image@main
         with:
           path: "${{ env.app-path }}"
-          name: "${{ env.app-path }}"
+          image-name: "${{ env.app-path }}"
           registry-password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
           registry-username: ${{ github.actor }}
