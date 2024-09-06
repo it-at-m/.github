@@ -30,18 +30,18 @@ runs:
         java-version: ${{ inputs.java-version }}
         distribution: "temurin"
         cache: "maven"
-        cache-dependency-path: "./${{ inputs.app-path}}/pom.xml"
+        cache-dependency-path: ".${{ inputs.app-path}}/pom.xml"
     - name: Maven Release Step
       id: maven-release-step
       shell: bash
       run: |
         git config --global user.email "github-actions@github.com"
         git config --global user.name "GitHub Actions"
-        MVN_ARTIFACT_ID=$(mvn -f ./${{inputs.app-path}}/pom.xml org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.artifactId -q -DforceStdout)
+        MVN_ARTIFACT_ID=$(mvn -f .${{inputs.app-path}}/pom.xml org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.artifactId -q -DforceStdout)
         echo $MVN_ARTIFACT_ID
         echo "MVN_ARTIFACT_ID=$MVN_ARTIFACT_ID" >> $GITHUB_OUTPUT
-        mvn release:prepare -f ./${{inputs.app-path}}/pom.xml -B -DreleaseVersion=${{ inputs.releaseVersion }} -DdevelopmentVersion=${{ inputs.developmentVersion }}
-        mvn release:perform -f ./${{inputs.app-path}}/pom.xml -Darguments="-Dmaven.deploy.skip=true"
+        mvn release:prepare -f .${{inputs.app-path}}/pom.xml -B -DreleaseVersion=${{ inputs.releaseVersion }} -DdevelopmentVersion=${{ inputs.developmentVersion }}
+        mvn release:perform -f .${{inputs.app-path}}/pom.xml -Darguments="-Dmaven.deploy.skip=true"
     - name: "Upload Artifact"
       uses: actions/upload-artifact@v4
       with:
