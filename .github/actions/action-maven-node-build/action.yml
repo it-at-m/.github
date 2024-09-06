@@ -41,6 +41,6 @@ runs:
     - name: "Upload Artifact"
       uses: actions/upload-artifact@v4
       with:
-        name: target
+        name: ${{inputs.app-path}}
         path: "**/target"
         retention-days: 5
