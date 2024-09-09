@@ -21,12 +21,16 @@ runs:
         cache-dependency-path: "./${{inputs.app-path}}/package-lock.json"
     - name: Install dependencies
       run: npm ci
+      shell: bash
     - name: Run lint
       run: npm run lint
+      shell: bash
     - name: Run test
       run: npm run test:unit
+      shell: bash
     - name: Run build
       run: npm run build
+      shell: bash
     - name: "Upload Artifact"
       uses: actions/upload-artifact@v4
       with:
