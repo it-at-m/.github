@@ -19,14 +19,14 @@ runs:
         node-version: ${{ inputs.node-version }}
         cache: "npm"
         cache-dependency-path: "./${{inputs.app-path}}/package-lock.json"
-      - name: Install dependencies
-        run: npm ci 
-      - name: Run lint
-        run: npm run lint
-      - name: Run test
-        run: npm run test:unit      
-      - name: Run build
-        run: npm run build
+    - name: Install dependencies
+      run: npm ci
+    - name: Run lint
+      run: npm run lint
+    - name: Run test
+      run: npm run test:unit
+    - name: Run build
+      run: npm run build
     - name: "Upload Artifact"
       uses: actions/upload-artifact@v4
       with:
