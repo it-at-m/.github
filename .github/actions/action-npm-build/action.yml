@@ -23,7 +23,7 @@ runs:
       run: npm --prefix ./${{inputs.app-path}} ci
       shell: bash
     - name: Run lint
-      run: npm run  f asdf --prefix  ./${{inputs.app-path}} lint
+      run: npm run --prefix  ./${{inputs.app-path}} lint
       shell: bash
     - name: Run test
       run: npm run  --prefix ./${{inputs.app-path}} test:unit
