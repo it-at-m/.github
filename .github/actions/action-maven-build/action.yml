@@ -8,7 +8,7 @@ inputs:
   app-path:
     required: true
     type: string
- outputs: 
+outputs: 
   artifact-name: 
      description: "name of the artifact upload"
      value: ${{env.artifact-name}}
