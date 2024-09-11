@@ -14,7 +14,7 @@ outputs:
      value: ${{env.artifact-name}}
 runs:
   env: 
-   artifact-name: hashFiles(format('./{0}/pom.xml', matrix.app-path)
+   artifact-name: hashFiles(format('./{0}/pom.xml', matrix.app-path))
   using: "composite"
   steps:
     - uses: actions/checkout@v4
