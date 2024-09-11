@@ -28,8 +28,8 @@ runs:
       run: mvn --update-snapshots -f ./${{inputs.app-path}}/pom.xml install
       shell: bash
     - id: artifact-name
-        run: echo "artifact-name=${{hashFiles(format('./{0}/pom.xml', matrix.app-path))}}" >> "$GITHUB_OUTPUT"
-        shell: bash
+      run: echo "artifact-name=${{hashFiles(format('./{0}/pom.xml', matrix.app-path))}}" >> "$GITHUB_OUTPUT"
+      shell: bash
     - id: upload-artifact
       name: "Upload Artifact"
       uses: actions/upload-artifact@v4
