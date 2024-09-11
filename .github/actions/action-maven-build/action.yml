@@ -8,8 +8,13 @@ inputs:
   app-path:
     required: true
     type: string
-
+ outputs: 
+  artifact-name: 
+     description: "name of the artifact upload"
+     value: ${{env.artifact-name}}
 runs:
+  env: 
+   artifact-name: hashFiles(format('./{0}/pom.xml', matrix.app-path)
   using: "composite"
   steps:
     - uses: actions/checkout@v4
@@ -23,9 +28,10 @@ runs:
     - name: Build with Maven
       run: mvn --update-snapshots -f ./${{inputs.app-path}}/pom.xml install
       shell: bash
-    - name: "Upload Artifact"
+    - id: upload-artifact
+      name: "Upload Artifact"
       uses: actions/upload-artifact@v4
       with:
-        name: ${{inputs.app-path}}
+        name: ${{env.artifact-name}}
         path: "**/target"
         retention-days: 5
