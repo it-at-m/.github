@@ -11,7 +11,7 @@ inputs:
 outputs: 
   artifact-name: 
      description: "name of the artifact upload"
-     value: ${{env.artifact-name}}
+     value: ${{steps.artifact-name.outputs.artifact-name}}
 runs:
 
   using: "composite"
@@ -27,12 +27,12 @@ runs:
     - name: Build with Maven
       run: mvn --update-snapshots -f ./${{inputs.app-path}}/pom.xml install
       shell: bash
+    - id: artifact-name
+        run: echo "artifact-name=${{hashFiles(format('./{0}/pom.xml', matrix.app-path))}}" >> "$GITHUB_OUTPUT"
     - id: upload-artifact
       name: "Upload Artifact"
-      env: 
-            artifact-name: ${{hashFiles(format('./{0}/pom.xml', matrix.app-path))}}
       uses: actions/upload-artifact@v4
       with:
-        name: ${{env.artifact-name}}
+        name: ${{steps.artifact-name.outputs.artifact-name}}
         path: "**/target"
         retention-days: 5
