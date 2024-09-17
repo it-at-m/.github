@@ -1,39 +1,34 @@
-name: Compliance check and build test
+name: build all
 
-env:
-  app-path: "sps-backend" # example "backend" for monorepos or "" for multi repos
-  enable-node: false # true
-
-on: # defining on which triggers this action should run
-  push:
-    branches:
-      # define on push of which branches should this action be run
-    paths:
-      - "sps-backend/**" # define the concrete paths on which a change triggers this action, e.g. backend/**
-      - ".github/workflows/**" # define the concrete paths on which a change triggers this action, e.g. backend/**
-  pull_request: # trigger this action also on Pull Requests
-    types: [opened, reopened]
-
+on: [push]
 jobs:
-  build-maven:
+  build:
     runs-on: ubuntu-latest
     env:
       TZ: Europe/Berlin # timezone
+    strategy:
+      matrix:
+        include: # hier müssen die Pfade angegeben werden
+          - app-path: sps-backend
+          - app-path: sps-frontend
     steps:
-      - uses: it-at-m/.github/.github/actions/action-maven-node-build@main
+      - uses: actions/checkout@v4
+      - if:  ${{hashFiles(format('./{0}/package.json', matrix.app-path))!=null}} 
+        id: node
+        uses: it-at-m/.github/.github/actions/action-npm-build@main
         with:
-          app-path: "/${{ env.app-path }}"
-          enable-node: "${{ env.enable-node }}"
-
-  build-image:
-    runs-on: ubuntu-latest
-    needs: build-maven
-    if: github.ref == 'refs/heads/main'
-    steps:
-      - uses: it-at-m/.github/.github/actions/action-build-image@main
+          app-path:  "${{ matrix.app-path }}"
+      - if:  ${{hashFiles(format('./{0}/pom.xml', matrix.app-path))!=null}} 
+        id: maven
+        uses: it-at-m/.github/.github/actions/action-maven-build@main
         with:
-          path: "${{ env.app-path }}"
-          image-name: "${{ env.app-path }}"
+          app-path: "${{ matrix.app-path }}"
+      - if: github.ref == 'refs/heads/test-pip'
+        uses: it-at-m/.github/.github/actions/action-build-image@main
+        with:
+          path: "${{  matrix.app-path }}"
+          image-name: "${{  matrix.app-path }}"
+          artifact-name: ${{join(steps.*.outputs.artifact-name)}}
           registry-password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
           registry-username: ${{ github.actor }}
