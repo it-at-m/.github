@@ -31,6 +31,9 @@ inputs:
   image-name:
     description: "Name to give the image"
     required: true
+  artifact-name:
+    description: "name where you download artifact"
+    required: true
 
 runs:
   using: "composite"
@@ -40,7 +43,7 @@ runs:
     - name: Download a single artifact
       uses: actions/download-artifact@v4
       with:
-        name: target
+        name: ${{ inputs.artifact-name }}
     - name: Login to Registry
       uses: docker/login-action@v3
       with:

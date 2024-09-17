@@ -5,10 +5,6 @@ inputs:
     required: false
     default: 17
     type: string
-  node-version:
-    required: false
-    default: 20
-    type: string
   app-path:
     required: true
     type: string
@@ -35,10 +31,6 @@ runs:
         distribution: "temurin"
         cache: "maven"
         cache-dependency-path: ".${{ inputs.app-path}}/pom.xml"
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ inputs.node-version }}
     - name: Maven Release Step
       id: maven-release-step
       shell: bash
@@ -53,6 +45,6 @@ runs:
     - name: "Upload Artifact"
       uses: actions/upload-artifact@v4
       with:
-        name: target
+        name: ${{inputs.app-path}}
         path: "**/target"
         retention-days: 5

@@ -1,0 +1,45 @@
+name: Compliance check and build test
+
+inputs:
+  node-version:
+    required: false
+    default: 20
+    type: string
+  app-path:
+    required: true
+    type: string
+outputs: 
+  artifact-name: 
+     description: "name of the artifact upload"
+     value: ${{steps.artifact-name.outputs.artifact-name}}
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v4
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: "npm"
+        cache-dependency-path: "./${{inputs.app-path}}/package-lock.json"
+    - name: Install dependencies
+      run: npm --prefix ./${{inputs.app-path}} ci
+      shell: bash
+    - name: Run lint
+      run: npm run --prefix  ./${{inputs.app-path}} lint
+      shell: bash
+    - name: Run test
+      run: npm run  --prefix ./${{inputs.app-path}} test:unit
+      shell: bash
+    - name: Run build
+      run: npm run  --prefix ./${{inputs.app-path}} build
+      shell: bash
+    - id: artifact-name
+      run: echo "artifact-name=${{hashFiles(format('./{0}/package.json', matrix.app-path))}}" >> "$GITHUB_OUTPUT"
+      shell: bash
+    - name: "Upload Artifact"
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{steps.artifact-name.outputs.artifact-name}}
+        path: "**/dist"
+        retention-days: 5
