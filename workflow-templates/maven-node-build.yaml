@@ -9,8 +9,8 @@ jobs:
     strategy:
       matrix:
         include: # hier müssen die Pfade angegeben werden
-          - app-path: sps-backend
-          - app-path: sps-frontend
+          - app-path: # z. B. sps-backend
+          - app-path: # z. B. sps-frontend
     steps:
       - uses: actions/checkout@v4
       - if:  ${{hashFiles(format('./{0}/package.json', matrix.app-path))!=null}} 
