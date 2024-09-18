@@ -1,0 +1,28 @@
+name: "Advanced CodeQL action"
+description: "Scans a repository using provided CodeQL language using build-mode 'none' and largest scan set"
+
+inputs:
+  codeql-language:
+    # see https://docs.github.com/en/code-security/code-scanning/creating-an-advanced-setup-for-code-scanning/customizing-your-advanced-setup-for-code-scanning#changing-the-languages-that-are-analyzed
+    description: "CodeQL language name to scan with (e.g java-kotlin, javascript-typescript, python, ...)"
+    required: true
+  path:
+    description: "Path to scan files in"
+    required: false
+    default: "."
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+    - name: Initialize CodeQL for ${{ inputs.language }}
+      uses: github/codeql-action/init@v3
+      with:
+        languages: ${{ inputs.language }}
+        build-mode: none # analysis without compilation
+        queries: +security-and-quality # use largest ruleset
+        source-root: ${{ inputs.path }}
+    - name: Perform CodeQL analysis for ${{ inputs.language }}
+      uses: github/codeql-action/analyze@v3
+      with:
+        category: "/language:${{input.language}}"

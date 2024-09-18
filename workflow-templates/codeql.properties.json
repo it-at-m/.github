@@ -1,4 +1,4 @@
 {
   "name": "codeql",
-  "description": "Advanced CodeQL setup for Java and JavaScript/TypeScript based projects"
+  "description": "Advanced CodeQL workflow used for scanning Java/JavaScript/TypeScript/Vue/Python based source files"
 }
