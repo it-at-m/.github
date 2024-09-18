@@ -8,5 +8,5 @@ on:
     branches: [main]
 
 jobs:
-  deploy-pages:
+  codeql:
     uses: it-at-m/.github/.github/workflows/codeql.yml@main
