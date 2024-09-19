@@ -47,7 +47,7 @@ jobs:
     if: github.ref_name == 'main' || needs.check-changes.outputs.java == 'true'
     steps:
       - name: Checkout repository
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: ./.github/actions/action-codeql
         with:
           codeql-language: java-kotlin
@@ -58,7 +58,7 @@ jobs:
     if: github.ref_name == 'main' || needs.check-changes.outputs.javascript-typescript-vue == 'true'
     steps:
       - name: Checkout repository
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: ./.github/actions/action-codeql
         with:
           codeql-language: javascript-typescript
@@ -69,7 +69,7 @@ jobs:
     if: github.ref_name == 'main' || needs.check-changes.outputs.python == 'true'
     steps:
       - name: Checkout repository
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: ./.github/actions/action-codeql
         with:
           codeql-language: python
