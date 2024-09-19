@@ -25,4 +25,4 @@ runs:
     - name: Perform CodeQL analysis for ${{ inputs.language }}
       uses: github/codeql-action/analyze@v3
       with:
-        category: "/language:${{input.language}}"
+        category: "/language:${{inputs.language}}"
