@@ -1,6 +1,20 @@
 name: "CodeQL Advanced"
 
-on: workflow_call
+on:
+  workflow_call:
+    inputs:
+      analyze-java:
+        default: false
+        type: boolean
+        description: Whether to analyze Java code or not (only set to true if repo has Java source code)
+      analyze-javascript-typescript-vue:
+        default: false
+        type: boolean
+        description: Whether to analyze JavaScript/TypeScript/Vue code or not (only set to true if repo has Javascript/Typescript/Vue source code)
+      analyze-python:
+        default: false
+        type: boolean
+        description: Whether to analyze Python code or not (only set to true if repo has Python source code)
 
 permissions:
   pull-requests: read
@@ -44,7 +58,7 @@ jobs:
     name: Analyze Java source files
     runs-on: ubuntu-latest
     needs: check-changes
-    if: github.ref_name == 'main' || needs.check-changes.outputs.java == 'true'
+    if: inputs.analyze-java == 'true' && (github.ref_name == 'main' || needs.check-changes.outputs.java == 'true')
     steps:
       - uses: it-at-m/.github/.github/actions/action-codeql@main
         with:
@@ -53,7 +67,7 @@ jobs:
     name: Analyze JavaScript/TypeScript/Vue source files
     runs-on: ubuntu-latest
     needs: check-changes
-    if: github.ref_name == 'main' || needs.check-changes.outputs.javascript-typescript-vue == 'true'
+    if: inputs.analyze-javascript-typescript-vue == 'true' && (github.ref_name == 'main' || needs.check-changes.outputs.javascript-typescript-vue == 'true')
     steps:
       - uses: it-at-m/.github/.github/actions/action-codeql@main
         with:
@@ -62,7 +76,7 @@ jobs:
     name: Analyze Python source files
     runs-on: ubuntu-latest
     needs: check-changes
-    if: github.ref_name == 'main' || needs.check-changes.outputs.python == 'true'
+    if: inputs.analyze-python == 'true' && (github.ref_name == 'main' || needs.check-changes.outputs.python == 'true')
     steps:
       - uses: it-at-m/.github/.github/actions/action-codeql@main
         with:
