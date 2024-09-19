@@ -15,14 +15,14 @@ runs:
   steps:
     - name: Checkout repository
       uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
-    - name: Initialize CodeQL for ${{ inputs.language }}
+    - name: Initialize CodeQL for ${{ inputs.codeql-language }}
       uses: github/codeql-action/init@v3
       with:
-        languages: ${{ inputs.language }}
+        languages: ${{ inputs.codeql-language }}
         build-mode: none # analysis without compilation
         queries: +security-and-quality # use largest ruleset
         source-root: ${{ inputs.path }}
-    - name: Perform CodeQL analysis for ${{ inputs.language }}
+    - name: Perform CodeQL analysis for ${{ inputs.codeql-language }}
       uses: github/codeql-action/analyze@v3
       with:
-        category: "/language:${{inputs.language}}"
+        category: "/language:${{ inputs.codeql-language }}"
