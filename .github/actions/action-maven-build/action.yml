@@ -3,7 +3,7 @@ name: Compliance check and build test
 inputs:
   java-version:
     required: false
-    default: 21
+    default: 20
     type: string
   app-path:
     required: true
