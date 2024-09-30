@@ -3,7 +3,7 @@ name: Maven Release
 inputs:
   java-version:
     required: false
-    default: 17
+    default: 21
     type: string
   app-path:
     required: true
