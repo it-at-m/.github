@@ -22,9 +22,6 @@ inputs:
     required: false
     default: |
       org.opencontainers.image.description=See ${{ github.server_url }}/${{ github.repository }}
-  app-path:
-    required: true
-    type: string
   path:
     description: "Path to the Dockerfile to build image from"
     required: true
