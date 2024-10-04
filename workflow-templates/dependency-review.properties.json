@@ -1,0 +1,6 @@
+{
+  "name": "dependency-review",
+  "description": "Reviews used dependencies for license compliance on every PR",
+  "iconName": "octicon file-badge",
+  "categories": ["dependency-management"]
+}
