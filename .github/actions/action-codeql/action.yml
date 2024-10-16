@@ -29,9 +29,9 @@ runs:
       uses: github/codeql-action/init@v3
       with:
         languages: ${{ inputs.codeql-language }}
-        build-mode: ${{ inputs.codeql-buildmode }}
+        # build-mode: ${{ inputs.codeql-buildmode }}
         queries: ${{ inputs.codeql-query }}
-        source-root: ${{ inputs.path }}
+        # source-root: ${{ inputs.path }}
     - if: inputs.codeql-buildmode == 'autobuild'
       name: Build using Autobuild
       uses: github/codeql-action/autobuild@v3
