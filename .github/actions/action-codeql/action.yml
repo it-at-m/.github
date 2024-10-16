@@ -1,11 +1,21 @@
 name: "Advanced CodeQL action"
-description: "Scans a repository using provided CodeQL language using build-mode 'none' and largest scan set"
+description: "Scans a repository using provided CodeQL language, buildmode and query scan set"
 
 inputs:
   codeql-language:
     # see https://docs.github.com/en/code-security/code-scanning/creating-an-advanced-setup-for-code-scanning/customizing-your-advanced-setup-for-code-scanning#changing-the-languages-that-are-analyzed
     description: "CodeQL language name to scan with (e.g java-kotlin, javascript-typescript, python, ...)"
     required: true
+  codeql-buildmode:
+    # see https://docs.github.com/en/code-security/code-scanning/creating-an-advanced-setup-for-code-scanning/codeql-code-scanning-for-compiled-languages#codeql-build-modes
+    description: "Build mode to use when scanning the source code (e.g. none, autobuild, manual)"
+    required: false
+    default: "none"
+  codeql-query:
+    # see https://docs.github.com/en/code-security/code-scanning/creating-an-advanced-setup-for-code-scanning/customizing-your-advanced-setup-for-code-scanning#using-queries-in-ql-packs
+    description: "Query set to use when analyzing the source code (e.g. default, security-extended, security-and-quality)"
+    required: false
+    default: "security-and-quality"
   path:
     description: "Path to scan files in"
     required: false
@@ -19,8 +29,8 @@ runs:
       uses: github/codeql-action/init@v3
       with:
         languages: ${{ inputs.codeql-language }}
-        build-mode: none # analysis without compilation
-        queries: +security-and-quality # use largest ruleset
+        build-mode: ${{ inputs.codeql-buildmode }}
+        queries: ${{ inputs.codeql-query }}
         source-root: ${{ inputs.path }}
     - name: Perform CodeQL analysis for ${{ inputs.codeql-language }}
       uses: github/codeql-action/analyze@v3
