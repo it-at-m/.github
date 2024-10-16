@@ -80,18 +80,12 @@ jobs:
       matrix:
         build-path: ${{ fromJSON(inputs.java-build-paths) }}
     steps:
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: ${{ inputs.java-version }}
-          distribution: "temurin"
-          cache: "maven"
-          cache-dependency-path: "${{ matrix.build-path }}/pom.xml"
       - uses: it-at-m/.github/.github/actions/action-codeql@feat/39-support-autobuild-mode-for-repositories-with-multiple-java-entrypoints
         with:
           codeql-language: java-kotlin
           codeql-buildmode: ${{ inputs.java-buildmode }}
           codeql-query: ${{ inputs.analysis-query }}
+          java-version: $${{ inputs.java-version }}
           path: ${{ matrix.build-path }}
   codeql-javascript-typescript-vue:
     name: Analyze JavaScript/TypeScript/Vue source files

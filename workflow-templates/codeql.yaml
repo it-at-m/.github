@@ -13,6 +13,7 @@ jobs:
     with:
       analyze-java: true
       # java-buildmode: "autobuild" # e.g. none, autobuild (default), manual
+      # java-version: "21" # default is java 21, only required when using autobuild and analyze-java trues
       # java-build-paths: "['./my-java-project1', './my-java-project2']" # define multiple build paths if using multiple java projects, only required when using java-buildmode 'autobuild'
       analyze-javascript-typescript-vue: true
       analyze-python: true
