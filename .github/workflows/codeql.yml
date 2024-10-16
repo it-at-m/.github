@@ -72,6 +72,7 @@ jobs:
     needs: check-changes
     if: inputs.analyze-java && (github.ref_name == 'main' || needs.check-changes.outputs.java == 'true')
     strategy:
+      fail-fast: false
       matrix:
         build-path: ${{ fromJSON(inputs.java-build-paths) }}
     steps:
