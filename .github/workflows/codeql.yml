@@ -7,6 +7,10 @@ on:
         default: false
         type: boolean
         description: Whether to analyze Java code or not (only set to true if repo has Java source code)
+      java-buildmode:
+        default: "autobuild"
+        type: string
+        description: Build mode to use for analysis of Java code (e.g. none, autobuild, manual)
       analyze-javascript-typescript-vue:
         default: false
         type: boolean
@@ -15,6 +19,10 @@ on:
         default: false
         type: boolean
         description: Whether to analyze Python code or not (only set to true if repo has Python source code)
+      analysis-query:
+        default: "security-and-quality"
+        type: string
+        description: Query set to use when analyzing the source code (e.g. default, security-extended, security-and-quality)
 
 permissions:
   pull-requests: read
@@ -63,6 +71,8 @@ jobs:
       - uses: it-at-m/.github/.github/actions/action-codeql@main
         with:
           codeql-language: java-kotlin
+          codeql-buildmode: ${{ inputs.java-buildmode }}
+          codeql-query: ${{ inputs.analysis-query }}
   codeql-javascript-typescript-vue:
     name: Analyze JavaScript/TypeScript/Vue source files
     runs-on: ubuntu-latest
@@ -72,6 +82,7 @@ jobs:
       - uses: it-at-m/.github/.github/actions/action-codeql@main
         with:
           codeql-language: javascript-typescript
+          codeql-query: ${{ inputs.analysis-query }}
   codeql-python:
     name: Analyze Python source files
     runs-on: ubuntu-latest
@@ -81,3 +92,4 @@ jobs:
       - uses: it-at-m/.github/.github/actions/action-codeql@main
         with:
           codeql-language: python
+          codeql-query: ${{ inputs.analysis-query }}
