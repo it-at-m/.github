@@ -36,7 +36,7 @@ runs:
         java-version: ${{ inputs.java-version }}
         distribution: "temurin"
         cache: "maven"
-        cache-dependency-path: "${{ matrix.path }}/pom.xml"
+        cache-dependency-path: "${{ inputs.path }}/pom.xml"
     - name: Initialize CodeQL for ${{ inputs.codeql-language }}
       uses: github/codeql-action/init@v3
       with:
