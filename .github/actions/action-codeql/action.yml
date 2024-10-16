@@ -32,7 +32,15 @@ runs:
         build-mode: ${{ inputs.codeql-buildmode }}
         queries: ${{ inputs.codeql-query }}
         source-root: ${{ inputs.path }}
+    - if: inputs.codeql-buildmode == 'autobuild'
+      name: Build using Autobuild
+      uses: github/codeql-action/autobuild@v3
+      with:
+        working-directory: ${{ inputs.path }}
+    - uses: github/codeql-action/analyze@v3
+      with:
+        category: "/language:${{ matrix.language }}"
     - name: Perform CodeQL analysis for ${{ inputs.codeql-language }}
       uses: github/codeql-action/analyze@v3
       with:
-        category: "/language:${{ inputs.codeql-language }}"
+        category: "/language:${{ inputs.codeql-language }}-/path:${{ inputs.path }}"
