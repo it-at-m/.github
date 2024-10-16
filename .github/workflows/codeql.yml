@@ -85,7 +85,7 @@ jobs:
           codeql-language: java-kotlin
           codeql-buildmode: ${{ inputs.java-buildmode }}
           codeql-query: ${{ inputs.analysis-query }}
-          java-version: $${{ inputs.java-version }}
+          java-version: ${{ inputs.java-version }}
           path: ${{ matrix.build-path }}
   codeql-javascript-typescript-vue:
     name: Analyze JavaScript/TypeScript/Vue source files
