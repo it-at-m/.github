@@ -11,6 +11,10 @@ on:
         default: "autobuild"
         type: string
         description: Build mode to use for analysis of Java code (e.g. none, autobuild, manual)
+      java-version:
+        default: "21"
+        type: string
+        description: Temurin JDK version to use for autobuild (only when java-buildmode is set to autobuild)
       java-build-paths:
         default: "['.']"
         type: string
@@ -76,6 +80,13 @@ jobs:
       matrix:
         build-path: ${{ fromJSON(inputs.java-build-paths) }}
     steps:
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ inputs.java-version }}
+          distribution: "temurin"
+          cache: "maven"
+          cache-dependency-path: "./${{ matrix.build-path }}/pom.xml"
       - uses: it-at-m/.github/.github/actions/action-codeql@feat/39-support-autobuild-mode-for-repositories-with-multiple-java-entrypoints
         with:
           codeql-language: java-kotlin
