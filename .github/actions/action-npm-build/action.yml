@@ -29,7 +29,7 @@ runs:
       run: npm run --prefix  ./${{inputs.app-path}} lint
       shell: bash
     - name: Run test
-      run: npm run  --prefix ./${{inputs.app-path}} test:unit
+      run: npm run  --prefix ./${{inputs.app-path}} test
       shell: bash
     - name: Run build
       run: npm run  --prefix ./${{inputs.app-path}} build
