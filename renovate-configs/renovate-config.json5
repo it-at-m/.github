@@ -1,0 +1,8 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Default Renovate configuration for projects at it@M",
+  "extends": [
+    "github>it-at-m/.github//renovate-configs/renovate-rules-config.json5",
+    "github>it-at-m/.github//renovate-configs/package-rules-config.json5",
+  ],
+}

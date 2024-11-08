@@ -1,0 +1,24 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Renovate configuration for package rules to ignore packages which are dependent on internal infrastructure and tooling. Manual updates are necessary when new versions get rolled out.",
+  "packageRules": [
+    {
+      "description": "Limit dependencies directly related to Node to latest version on company machines",
+      "matchDatasources": ["npm"],
+      "matchPackageNames": ["@types/node"],
+      "allowedVersions": "<=20.14.0"
+    },
+    {
+      "description": "Limit Keycloak version in Docker stacks to latest version in company infrastructure, might slighty differ due to some RedHat KeyCloak versions not being available as Docker image",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["quay.io/keycloak/keycloak"],
+      "allowedVersions": "<=20.0.5"
+    },
+    {
+      "description": "Limit Postgres version in Docker stacks to latest version in company infrastructure",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["postgres"],
+      "allowedVersions": "<=16.4"
+    }
+  ]
+}
