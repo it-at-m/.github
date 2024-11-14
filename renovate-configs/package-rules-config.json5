@@ -6,7 +6,7 @@
       "description": "Limit dependencies directly related to Node to latest version on company machines",
       "matchDatasources": ["npm"],
       "matchPackageNames": ["@tsconfig/node-lts", "@types/node"],
-      "allowedVersions": "<=20.18.0"
+      "allowedVersions": "<=22.11.0"
     },
     {
       "description": "Limit Keycloak version in Docker stacks to latest version in company infrastructure, might slighty differ due to some RedHat KeyCloak versions not being available as Docker image",
