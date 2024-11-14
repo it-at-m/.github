@@ -17,6 +17,9 @@ inputs:
 outputs:
   MVN_ARTIFACT_ID:
     value: ${{ steps.maven-release-step.outputs.MVN_ARTIFACT_ID }}
+  artifact-name: 
+     description: "name of the artifact upload"
+     value: ${{steps.artifact-name.outputs.artifact-name}}    
 
 runs:
   using: "composite"
