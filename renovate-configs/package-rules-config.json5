@@ -5,7 +5,7 @@
     {
       "description": "Limit dependencies directly related to Node to latest version on company machines",
       "matchDatasources": ["npm"],
-      "matchPackageNames": ["@types/node"],
+      "matchPackageNames": ["@tsconfig/node-lts", "@types/node"],
       "allowedVersions": "<=20.18.0"
     },
     {
