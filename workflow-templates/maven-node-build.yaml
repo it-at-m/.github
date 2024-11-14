@@ -7,18 +7,19 @@ jobs:
     env:
       TZ: Europe/Berlin # timezone
     strategy:
+      fail-fast: false
       matrix:
         include: # hier müssen die Pfade angegeben werden
-          - app-path: # z. B. sps-backend
-          - app-path: # z. B. sps-frontend
+          - app-path: # z. B. refarch-eai
+          - app-path: # z. B. refarch-webcomponent
     steps:
       - uses: actions/checkout@v4
-      - if:  ${{hashFiles(format('./{0}/package.json', matrix.app-path))!=null}} 
+      - if:  ${{hashFiles(format('./{0}/package.json', matrix.app-path))!=null}}
         id: node
         uses: it-at-m/.github/.github/actions/action-npm-build@main
         with:
           app-path:  "${{ matrix.app-path }}"
-      - if:  ${{hashFiles(format('./{0}/pom.xml', matrix.app-path))!=null}} 
+      - if:  ${{hashFiles(format('./{0}/pom.xml', matrix.app-path))!=null}}
         id: maven
         uses: it-at-m/.github/.github/actions/action-maven-build@main
         with:
@@ -30,5 +31,4 @@ jobs:
           image-name: "${{  matrix.app-path }}"
           artifact-name: ${{join(steps.*.outputs.artifact-name)}}
           registry-password: ${{ secrets.GITHUB_TOKEN }}
-          registry: ghcr.io
           registry-username: ${{ github.actor }}
