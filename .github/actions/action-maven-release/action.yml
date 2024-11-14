@@ -43,7 +43,7 @@ runs:
         mvn release:prepare -f .${{inputs.app-path}}/pom.xml -B -DreleaseVersion=${{ inputs.releaseVersion }} -DdevelopmentVersion=${{ inputs.developmentVersion }}
         mvn release:perform -f .${{inputs.app-path}}/pom.xml -Darguments="-Dmaven.deploy.skip=true"
     - id: artifact-name
-      run: echo "artifact-name=${{hashFiles(format('./{0}/pom.xml', matrix.app-path))}}" >> "$GITHUB_OUTPUT"
+      run: echo "artifact-name=${{hashFiles(format('./{0}/pom.xml', inputs.app-path))}}" >> "$GITHUB_OUTPUT"
       shell: bash        
     - name: "Upload Artifact"
       uses: actions/upload-artifact@v4
