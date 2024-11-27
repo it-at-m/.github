@@ -7,7 +7,7 @@
 /workflow-templates/ @it-at-m/sps
 
 # Open Source-related files
-/profile/ @it-at-m/opensource.muenchen.de
+/profile/ @it-at-m/ospo
 
 # Protect CODEOWNERS file itself against modification
 /.github/CODEOWNERS @it-at-m/itm-admin
