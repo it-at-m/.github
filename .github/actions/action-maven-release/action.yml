@@ -17,6 +17,19 @@ inputs:
   skipDeployment:
      default: true
      type: boolean
+  SIGN_KEY_PASS:
+     required: true
+     type: string
+  CENTRAL_USERNAME:
+     required: true
+     type: string
+  CENTRAL_PASSWORD:
+     required: true
+     type: string
+  GDP_PRIVATE_KEY:
+    required: true
+    type: string
+    
 outputs:
   MVN_ARTIFACT_ID:
     value: ${{ steps.maven-release-step.outputs.MVN_ARTIFACT_ID }}
@@ -38,10 +51,10 @@ runs:
         cache: "maven"
         cache-dependency-path: ".${{ inputs.app-path}}/pom.xml"
         server-id: "central"
-        server-username: CENTRAL_USERNAME
-        server-password: CENTRAL_PASSWORD
-        gpg-private-key: ${{ secrets.gpg_private_key }}
-        gpg-passphrase: SIGN_KEY_PASS
+        server-username: ${{ inputs.CENTRAL_USERNAME }}
+        server-password: ${{ inputs.CENTRAL_PASSWORD }}
+        gpg-private-key: ${{ inputs.GDP_PRIVATE_KEY }}
+        gpg-passphrase: ${{ inputs.SIGN_KEY_PASS }}
     - name: Maven Release Step
       id: maven-release-step
       shell: bash
@@ -53,9 +66,9 @@ runs:
         echo "MVN_ARTIFACT_ID=$MVN_ARTIFACT_ID" >> $GITHUB_OUTPUT
         mvn release:prepare release:perform -f .${{inputs.app-path}}/pom.xml -B -DreleaseVersion=${{ inputs.releaseVersion }} -DdevelopmentVersion=${{ inputs.developmentVersion }} -Darguments="-Dmaven.deploy.skip=${{ inputs.skipDeployment }}"
       env:
-          SIGN_KEY_PASS: ${{ secrets.gpg_passphrase }}
-          CENTRAL_USERNAME: ${{ secrets.sonatype_username }}
-          CENTRAL_PASSWORD: ${{ secrets.sonatype_password }}
+          SIGN_KEY_PASS: ${{ inputs.GDP_PRIVATE_KEY }}
+          CENTRAL_USERNAME: ${{ inputs.CENTRAL_USERNAME }}
+          CENTRAL_PASSWORD: ${{ inputs.CENTRAL_PASSWORD }}
 
     - id: artifact-name
       run: echo "artifact-name=${{hashFiles(format('./{0}/pom.xml', inputs.app-path))}}" >> "$GITHUB_OUTPUT"
