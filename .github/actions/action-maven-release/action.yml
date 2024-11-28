@@ -14,6 +14,9 @@ inputs:
   developmentVersion:
     required: true
     type: string
+  skipDeployment:
+     default: true
+     type: boolean
 outputs:
   MVN_ARTIFACT_ID:
     value: ${{ steps.maven-release-step.outputs.MVN_ARTIFACT_ID }}
@@ -34,6 +37,11 @@ runs:
         distribution: "temurin"
         cache: "maven"
         cache-dependency-path: ".${{ inputs.app-path}}/pom.xml"
+        server-id: "central"
+        server-username: CENTRAL_USERNAME
+        server-password: CENTRAL_PASSWORD
+        gpg-private-key: ${{ secrets.gpg_private_key }}
+        gpg-passphrase: SIGN_KEY_PASS
     - name: Maven Release Step
       id: maven-release-step
       shell: bash
@@ -43,8 +51,12 @@ runs:
         MVN_ARTIFACT_ID=$(mvn -f .${{inputs.app-path}}/pom.xml org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.artifactId -q -DforceStdout)
         echo $MVN_ARTIFACT_ID
         echo "MVN_ARTIFACT_ID=$MVN_ARTIFACT_ID" >> $GITHUB_OUTPUT
-        mvn release:prepare -f .${{inputs.app-path}}/pom.xml -B -DreleaseVersion=${{ inputs.releaseVersion }} -DdevelopmentVersion=${{ inputs.developmentVersion }}
-        mvn release:perform -f .${{inputs.app-path}}/pom.xml -Darguments="-Dmaven.deploy.skip=true"
+        mvn release:prepare release:perform -f .${{inputs.app-path}}/pom.xml -B -DreleaseVersion=${{ inputs.releaseVersion }} -DdevelopmentVersion=${{ inputs.developmentVersion }} -Darguments="-Dmaven.deploy.skip=${{ inputs.skipDeployment }}"
+      env:
+          SIGN_KEY_PASS: ${{ secrets.gpg_passphrase }}
+          CENTRAL_USERNAME: ${{ secrets.sonatype_username }}
+          CENTRAL_PASSWORD: ${{ secrets.sonatype_password }}
+
     - id: artifact-name
       run: echo "artifact-name=${{hashFiles(format('./{0}/pom.xml', inputs.app-path))}}" >> "$GITHUB_OUTPUT"
       shell: bash        
