@@ -15,9 +15,9 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
     - name: Set up Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4
       with:
         node-version: ${{ inputs.node-version }}
         cache: "npm"
@@ -38,7 +38,7 @@ runs:
       run: echo "artifact-name=${{hashFiles(format('./{0}/package.json', matrix.app-path))}}" >> "$GITHUB_OUTPUT"
       shell: bash
     - name: "Upload Artifact"
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4
       with:
         name: ${{steps.artifact-name.outputs.artifact-name}}
         path: "**/dist"

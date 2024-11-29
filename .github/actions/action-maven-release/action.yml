@@ -42,9 +42,9 @@ runs:
   steps:
     # Checkout source code, set up Java, etc. Then...
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
     - name: Set up JDK
-      uses: actions/setup-java@v4
+      uses: actions/setup-java@8df1039502a15bceb9433410b1a100fbe190c53b # v4
       with:
         java-version: ${{ inputs.java-version }}
         distribution: "temurin"
@@ -74,7 +74,7 @@ runs:
       run: echo "artifact-name=${{hashFiles(format('./{0}/pom.xml', inputs.app-path))}}" >> "$GITHUB_OUTPUT"
       shell: bash        
     - name: "Upload Artifact"
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4
       with:
         name: ${{steps.artifact-name.outputs.artifact-name}}
         path: "**/target"
