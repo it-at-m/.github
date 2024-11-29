@@ -1,0 +1,14 @@
+# These owners will be the default owners for everything in the repo.
+* @it-at-m/itm-admin
+
+# GitHub actions, workflows and more
+/.github/actions/ @it-at-m/sps
+/.github/workflows/ @it-at-m/sps
+/workflow-templates/ @it-at-m/sps
+/workflow-configs/ @it-at-m/sps
+
+# Open Source-related files
+/profile/ @it-at-m/itm-admin
+
+# Protect CODEOWNERS file itself against modification
+/.github/CODEOWNERS @it-at-m/itm-admin
