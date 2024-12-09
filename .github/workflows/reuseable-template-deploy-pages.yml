@@ -54,7 +54,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ inputs.sub-path }}/docs/.vitepress/dist
+          path: ${{ inputs.sub-path }}/.vitepress/dist
 
   # Deployment job
   deploy:
