@@ -1,3 +1,4 @@
+# https://vitepress.dev/guide/deploy#github-pages
 name: Deploy Pages
 on:
   workflow_call:
