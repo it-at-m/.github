@@ -16,4 +16,4 @@ on:
 
 jobs:
   deploy-pages:
-    uses: it-at-m/.github/.github/workflows/reuseable-template-deploy-pages.yml@main
+    uses: it-at-m/.github/.github/workflows/deploy-pages.yml@main
