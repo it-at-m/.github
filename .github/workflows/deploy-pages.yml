@@ -13,7 +13,7 @@ on:
         type: string
       build-cmd:
         required: false
-        default: "docs:build"
+        default: "build"
         type: string
       dist-path:
         required: false
