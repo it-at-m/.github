@@ -15,6 +15,10 @@ on:
         required: false
         default: "docs:build"
         type: string
+      dist-path:
+        required: false
+        default: ".vitepress/dist"
+        type: string
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -55,7 +59,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ inputs.sub-path }}/.vitepress/dist
+          path: ${{ inputs.sub-path }}/${{ inputs.dist-path }}
 
   # Deployment job
   deploy:
