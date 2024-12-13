@@ -1,6 +1,4 @@
-# Sample workflow for building and deploying a VitePress site to GitHub Pages
-#
-name: Deploy VitePress site to Pages
+name: Deploy docs
 
 on:
   # Runs on pushes targeting the `main` branch. Change this to `master` if you're
@@ -16,4 +14,4 @@ on:
 
 jobs:
   deploy-pages:
-    uses: it-at-m/.github/.github/workflows/reuseable-template-deploy-pages.yml@main
+    uses: it-at-m/.github/.github/workflows/deploy-pages.yml@main

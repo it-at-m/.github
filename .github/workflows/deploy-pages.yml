@@ -1,3 +1,4 @@
+# https://vitepress.dev/guide/deploy#github-pages
 name: Deploy Pages
 on:
   workflow_call:
@@ -5,6 +6,18 @@ on:
       sub-path:
         required: false
         default: "./docs"
+        type: string
+      node-version:
+        required: false
+        default: "22"
+        type: string
+      build-cmd:
+        required: false
+        default: "build"
+        type: string
+      dist-path:
+        required: false
+        default: "dist"
         type: string
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
@@ -30,23 +43,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Not needed if lastUpdated is not enabled
+          fetch-depth: 0 # Required for vitepress lastUpdated
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: npm # or pnpm / yarn
+          node-version: ${{ inputs.node-version }}
+          cache: npm
           cache-dependency-path: "${{ inputs.sub-path }}/package-lock.json"
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Install dependencies
-        run: npm ci # or pnpm install / yarn install / bun install
+        run: npm ci
       - name: Build with VitePress
-        run: npm run docs:build # or pnpm docs:build / yarn docs:build / bun run docs:build
+        run: npm run ${{ inputs.build-cmd }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ inputs.sub-path }}/docs/.vitepress/dist
+          path: ${{ inputs.sub-path }}/${{ inputs.dist-path }}
 
   # Deployment job
   deploy:
