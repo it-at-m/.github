@@ -16,9 +16,9 @@ runs:
 
   using: "composite"
   steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
     - name: Set up JDK
-      uses: actions/setup-java@v4
+      uses: actions/setup-java@7a6d8a8234af8eb26422e24e3006232cccaa061b # v4
       with:
         java-version: ${{ inputs.java-version }}
         distribution: "temurin"
@@ -32,7 +32,7 @@ runs:
       shell: bash
     - id: upload-artifact
       name: "Upload Artifact"
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4
       with:
         name: ${{steps.artifact-name.outputs.artifact-name}}
         path: "**/target"
