@@ -1,4 +1,4 @@
-name: Compliance check and build test
+name: action-maven-build
 
 inputs:
   java-version:
