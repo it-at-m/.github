@@ -5,9 +5,11 @@ inputs:
     required: false
     default: 21
     type: string
+    description: set the java version
   app-path:
     required: true
     type: string
+    description: path to the pom.xml
 outputs: 
   artifact-name: 
      description: "name of the artifact upload"
