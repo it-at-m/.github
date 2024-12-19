@@ -1,5 +1,5 @@
 # https://vitepress.dev/guide/deploy#github-pages
-name: Deploy Pages
+name: deploy-pages
 on:
   workflow_call:
     inputs:
