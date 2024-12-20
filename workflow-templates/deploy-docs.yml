@@ -1,16 +1,12 @@
-name: Deploy docs
+name: Deploy documentation website
 
 on:
-  # Runs on pushes targeting the `main` branch. Change this to `master` if you're
-  # using the `master` branch as the default branch.
+  # Runs on pushes targeting the `main` branch
   push:
     branches: [main]
     paths:
       - "docs/**"
-      - ".github/workflows/**" # define the concrete paths on which a change triggers this action, e.g. backend/**
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+      - ".github/workflows/deploy-docs.yml" # define the concrete paths on which a change triggers this action, e.g. docs/**
 
 jobs:
   deploy-pages:
