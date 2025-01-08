@@ -1,4 +1,4 @@
-name: "action-npm-build"
+name: Compliance check and build test
 inputs:
   node-version:
     required: false
