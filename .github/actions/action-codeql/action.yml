@@ -1,4 +1,4 @@
-name: "action-codeql"
+name: "Advanced CodeQL action"
 description: "Scans a repository using provided CodeQL language, buildmode and query scan set"
 
 inputs:
