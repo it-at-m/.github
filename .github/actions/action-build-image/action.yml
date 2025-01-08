@@ -1,4 +1,4 @@
-name: action-build-image
+name: "Build Docker Image"
 description: "Builds and pushes a docker image"
 
 inputs:
