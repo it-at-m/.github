@@ -1,4 +1,4 @@
-name: "action-maven-release"
+name: Maven Release
 
 inputs:
   java-version:
