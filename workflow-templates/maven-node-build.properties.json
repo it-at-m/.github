@@ -1,4 +1,4 @@
 {
-  "name": "Maven-Node-Build",
-  "description": "Bauen eines Refarch Apigateway oder Backend"
+  "name": "maven-node-build",
+  "description": "Build a Refarch Apigateway or Backend"
 }
