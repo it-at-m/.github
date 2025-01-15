@@ -62,4 +62,4 @@ jobs:
           artifact-name: ${{ needs.release-maven.outputs.ARTIFACT_NAME }}
           mvn-artifact-id: ${{ needs.release-maven.outputs.MVN_ARTIFACT_ID }}
           release-version: ${{ github.event.inputs.releaseVersion }}
-          jar-path: ${{ github.event.inputs.app-path }}/target/*.jar
+          artifact-path: ${{ github.event.inputs.app-path }}/target/*.jar

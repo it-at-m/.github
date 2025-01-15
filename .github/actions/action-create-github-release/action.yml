@@ -13,7 +13,7 @@ inputs:
     required: true
     type: string
     description: "Version to use when preparing a release (e.g., 1.2.3)"
-  jar-path:
+  artifact-path:
     required: true
     type: string
     description: "path to the artifacts (e.g. ./target/*.jar)"
