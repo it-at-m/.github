@@ -59,11 +59,11 @@ runs:
          git push && git push --tags || exit 1
         shell: bash
       - id: node
-        shell: bash
         uses: it-at-m/.github/.github/actions/action-npm-build@main
         with:
           app-path:  "${{ inputs.app-path }}"
       - if: "${{ !inputs.skipDeployment }}"
+        shell: bash
         run: npm --prefix ./${{ inputs.app-path }} publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ inputs.NPM_TOKEN }} # Centralized token in it-at-m GitHub organization
