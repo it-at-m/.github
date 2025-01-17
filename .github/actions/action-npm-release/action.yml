@@ -1,4 +1,4 @@
-name: Npm Relase
+name: Npm Release
 
 inputs:
   node-version:
