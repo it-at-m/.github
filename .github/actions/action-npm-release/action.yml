@@ -59,6 +59,7 @@ runs:
          git push && git push --tags || exit 1
         shell: bash
       - id: node
+        shell: bash
         uses: it-at-m/.github/.github/actions/action-npm-build@main
         with:
           app-path:  "${{ inputs.app-path }}"
