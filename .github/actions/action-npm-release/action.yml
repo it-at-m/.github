@@ -22,6 +22,11 @@ inputs:
      default: true
      type: boolean
      description: skip deployment to npm registry
+  NPM_TOKEN: 
+   type: string
+   required: true
+   description: npm token for release
+     
 outputs:
   ARTIFACT_NAME:
     description: "artifact name from pom"
@@ -60,4 +65,4 @@ runs:
       - if: "${{ !inputs.skipDeployment }}"
         run: npm --prefix ./${{ inputs.app-path }} publish --provenance --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # Centralized token in it-at-m GitHub organization
+          NODE_AUTH_TOKEN: ${{ inputs.NPM_TOKEN }} # Centralized token in it-at-m GitHub organization
