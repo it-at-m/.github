@@ -29,7 +29,8 @@ outputs:
   VERSION: 
      description: "name of the artifact upload"
      value: ${{steps.node-release.outputs.VERSION}}   
-jobs:
+
+runs:
     using: "composite"
     steps:
       - name: Checkout repository
