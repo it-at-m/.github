@@ -29,7 +29,7 @@ inputs:
      
 outputs:
   ARTIFACT_NAME:
-    description: "artifact name from pom"
+    description: "artifact name from job artifact"
     value:  ${{ steps.node.outputs.artifact-name }}
   VERSION: 
      description: "version of the artifact upload"
