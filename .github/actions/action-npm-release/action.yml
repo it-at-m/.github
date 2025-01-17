@@ -64,6 +64,7 @@ runs:
           app-path:  "${{ inputs.app-path }}"
       - if: "${{ !inputs.skipDeployment }}"
         shell: bash
+        working-directory: ./${{inputs.app-path}}
         run: npm --prefix ./${{ inputs.app-path }} publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ inputs.NPM_TOKEN }} # Centralized token in it-at-m GitHub organization
