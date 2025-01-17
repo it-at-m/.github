@@ -30,10 +30,10 @@ inputs:
 outputs:
   ARTIFACT_NAME:
     description: "artifact name from pom"
-    value: ${{ steps.node.outputs.artifact-name }}
+    value:  ${{ steps.node.outputs.artifact-name }}
   VERSION: 
      description: "name of the artifact upload"
-     value: ${{steps.node-release.outputs.VERSION}}   
+     value: ${{steps.node-release.outputs.VERSION}}  
 
 runs:
     using: "composite"
