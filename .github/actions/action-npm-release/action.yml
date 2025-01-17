@@ -52,6 +52,7 @@ runs:
          git commit -m "Bump version to ${NEW_VERSION}" || exit 1
          git tag "${NEW_VERSION}" || exit 1
          git push && git push --tags || exit 1
+        shell: bash
       - id: node
         uses: it-at-m/.github/.github/actions/action-npm-build@main
         with:
