@@ -18,7 +18,7 @@ inputs:
           - patch
           - minor
           - major    
-  skipDeployment:
+  skip-deployment:
      default: true
      type: boolean
      description: skip deployment to npm registry
