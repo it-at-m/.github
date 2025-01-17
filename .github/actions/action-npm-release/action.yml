@@ -22,7 +22,7 @@ inputs:
      default: true
      type: boolean
      description: skip deployment to npm registry
-  NPM_TOKEN: 
+  npm-token: 
    type: string
    required: true
    description: npm token for release
