@@ -10,7 +10,14 @@
       "matchUpdateTypes": ["minor", "patch"],
       "matchCurrentVersion": "!/^0/",
       "automerge": true,
-      "matchFileNames": [".github/**", "workflow-*/**"]
+      "matchFileNames": [".github/**"]
+    },
+    {
+      "description": "Automerge non-major updates1",
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchCurrentVersion": "!/^0/",
+      "automerge": true,
+      "matchFileNames": ["workflow-templates/**"]
     }
   ]
 }
