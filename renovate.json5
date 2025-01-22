@@ -2,5 +2,22 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "github>it-at-m/.github//renovate-configs/renovate-config.json5"
+  ],
+
+  "packageRules": [
+    {
+      "description": "Automerge non-major updates",
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchCurrentVersion": "!/^0/",
+      "automerge": true,
+      "matchFileNames": [".github/**"]
+    },
+    {
+      "description": "Automerge non-major updates1",
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchCurrentVersion": "!/^0/",
+      "automerge": true,
+      "matchFileNames": ["workflow-templates/**"]
+    }
   ]
 }
