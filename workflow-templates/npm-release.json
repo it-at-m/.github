@@ -1,0 +1,4 @@
+{
+  "name": "npm-release",
+  "description": "Makes a NPM-Release, with Github-Release and Docker-Image"
+}
