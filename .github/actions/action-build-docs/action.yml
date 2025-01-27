@@ -11,7 +11,7 @@ inputs:
     required: false
     default: "22"
     type: string
-    description: node version
+    description: Node version
   build-cmd:
     required: false
     default: "build"
