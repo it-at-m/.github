@@ -54,7 +54,7 @@ runs:
       run: npm --prefix ./${{inputs.docs-path }}  ci
       shell: bash
     - name: Run lint
-      run: npm run --prefix  ./${{inputs.sub-path}} lint
+      run: npm run --prefix  ./${{inputs.docs-path}} lint
       shell: bash
     - name: Build with VitePress
       run: npm --prefix ./${{inputs.sub-path }} run ${{ inputs.build-cmd }}
