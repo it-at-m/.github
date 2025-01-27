@@ -1,4 +1,4 @@
-name: deploy docs
+name: Deploy docs
 inputs:
   artifact_name:
     description: "The name of the artifact to deploy"

@@ -1,27 +1,27 @@
 # https://vitepress.dev/guide/deploy#github-pages
-name: Deploy Pages
+name: Build docs
 
 inputs:
-  sub-path:
+  docs-path:
     required: false
     default: "./docs"
     type: string
-    description: location where the vitepress project is located
+    description: Path to vitepress docs project
   node-version:
     required: false
     default: "22"
     type: string
-    description: node version
+    description: Node version
   build-cmd:
     required: false
     default: "build"
     type: string
-    description: change the build command, for use of vuepress
+    description: Change build command, if using vuepress
   dist-path:
     required: false
     default: ".vitepress/dist"
     type: string
-    description: output path of vite, which should be uploaded to github pages
+    description: Vitepress output path, which should be uploaded to github pages
 
 runs:
   using: "composite"
@@ -35,19 +35,19 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
         cache: npm
-        cache-dependency-path: "${{ inputs.sub-path }}/package-lock.json"
+        cache-dependency-path: "${{ inputs.docs-path }}/package-lock.json"
     - name: Setup Pages
       uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
     - name: Install dependencies
-      run: npm --prefix ./${{inputs.sub-path }}  ci
+      run: npm --prefix ./${{inputs.docs-path }}  ci
       shell: bash
     - name: Run lint
-      run: npm run --prefix  ./${{inputs.sub-path}} lint
+      run: npm run --prefix  ./${{inputs.docs-path}} lint
       shell: bash
     - name: Build with VitePress
-      run: npm --prefix ./${{inputs.sub-path }} run ${{ inputs.build-cmd }}
+      run: npm --prefix ./${{inputs.docs-path }} run ${{ inputs.build-cmd }}
       shell: bash
     - name: Upload artifact
       uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
       with:
-        path: ${{ inputs.sub-path }}/${{ inputs.dist-path }}
+        path: ${{ inputs.docs-path }}/${{ inputs.dist-path }}
