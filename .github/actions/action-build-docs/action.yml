@@ -2,7 +2,7 @@
 name: Build docs
 
 inputs:
-  sub-path:
+  docs-path:
     required: false
     default: "./docs"
     type: string
