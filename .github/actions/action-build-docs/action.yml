@@ -47,7 +47,7 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
         cache: npm
-        cache-dependency-path: "${{ inputs.sub-path }}/package-lock.json"
+        cache-dependency-path: "${{ inputs.docs-path }}/package-lock.json"
     - name: Setup Pages
       uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
     - name: Install dependencies
