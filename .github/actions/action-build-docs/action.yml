@@ -6,7 +6,7 @@ inputs:
     required: false
     default: "./docs"
     type: string
-    description: location where the vitepress project is located
+    description: Path to vitepress docs project
   node-version:
     required: false
     default: "22"
