@@ -21,7 +21,7 @@ inputs:
     required: false
     default: ".vitepress/dist"
     type: string
-    description: output path of vite, which should be uploaded to github pages
+    description: Vitepress output path, which should be uploaded to github pages
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
