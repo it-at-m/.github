@@ -16,7 +16,7 @@ inputs:
     required: false
     default: "build"
     type: string
-    description: change the build command, for use of vuepress
+    description: Change build command, if using vuepress
   dist-path:
     required: false
     default: ".vitepress/dist"
