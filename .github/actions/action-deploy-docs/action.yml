@@ -5,6 +5,11 @@ inputs:
     default: "github-pages"
     required: false
     type: string
+  deploy-branch:
+    required: false
+    type: string
+    default: 'main'
+    description: "Branch to deploy documentation from"
 
 # Deployment job
 runs:
@@ -12,6 +17,7 @@ runs:
   steps:
     - name: Deploy to GitHub Pages
       id: deployment
+      if: (github.ref_name == inputs.deploy-branch)
       uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
       with:
         artifact_name: ${{ inputs.artifact_name }}
