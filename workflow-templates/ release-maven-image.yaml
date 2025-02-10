@@ -29,7 +29,7 @@ jobs:
       TZ: Europe/Berlin # timezone
     steps:
       - id: maven-release-step
-        uses: it-at-m/lhm_actions/action-templates/actions/action-maven-release@main
+        uses: it-at-m/lhm_actions/action-templates/actions/action-maven-release@1.0.0
         with:
           app-path: "/${{ github.event.inputs.app-path }}"
           releaseVersion: "${{ github.event.inputs.releaseVersion }}"
