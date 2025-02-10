@@ -30,4 +30,4 @@ jobs:
       - id: deploy_docs
         if: (github.ref_name == 'main')
 
-        uses: it-at-m/lhm_actions/action-templates/actions/action-deploy-docs@main
+        uses: it-at-m/lhm_actions/action-templates/actions/action-deploy-docs@1.0.0
