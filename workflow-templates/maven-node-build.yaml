@@ -25,7 +25,7 @@ jobs:
         with:
           app-path: "${{ matrix.app-path }}"
       - if: github.ref == 'refs/heads/main'
-        uses: it-at-m/lhm_actions/action-templates/actions/action-build-image@main
+        uses: it-at-m/lhm_actions/action-templates/actions/action-build-image@1.0.0
         with:
           path: "${{  matrix.app-path }}"
           image-name: "${{  matrix.app-path }}"
