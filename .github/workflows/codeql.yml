@@ -103,7 +103,7 @@ jobs:
     needs: check-changes
     if: inputs.analyze-python && (github.ref_name == 'main' || needs.check-changes.outputs.python == 'true')
     steps:
-      - uses: it-at-m/lhm_actions/action-templates/actions/action-codeql@main
+      - uses: it-at-m/lhm_actions/action-templates/actions/action-codeql@1.0.0
         with:
           codeql-language: python
           codeql-query: ${{ inputs.analysis-query }}
