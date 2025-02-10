@@ -13,7 +13,7 @@ jobs:
           - app-path: # eg. refarch-eai
           - app-path: # eg. refarch-webcomponent
     steps:
-      - uses: it-at-m/lhm_actions/action-templates/actions/action-checkout@main
+      - uses: it-at-m/lhm_actions/action-templates/actions/action-checkout@1.0.0
       - if:  ${{hashFiles(format('./{0}/package.json', matrix.app-path))!=null}}
         id: node
         uses: it-at-m/lhm_actions/action-templates/actions/action-npm-build@main
