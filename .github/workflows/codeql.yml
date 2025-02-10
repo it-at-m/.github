@@ -93,7 +93,7 @@ jobs:
     needs: check-changes
     if: inputs.analyze-javascript-typescript-vue && (github.ref_name == 'main' || needs.check-changes.outputs.javascript-typescript-vue == 'true')
     steps:
-      - uses: it-at-m/lhm_actions/action-templates/actions/action-codeql@main
+      - uses: it-at-m/lhm_actions/action-templates/actions/action-codeql@1.0.0
         with:
           codeql-language: javascript-typescript
           codeql-query: ${{ inputs.analysis-query }}
