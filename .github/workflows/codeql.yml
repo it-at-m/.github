@@ -80,7 +80,7 @@ jobs:
       matrix:
         build-path: ${{ fromJSON(inputs.java-build-paths) }}
     steps:
-      - uses: it-at-m/lhm_actions/action-templates/actions/action-codeql@main
+      - uses: it-at-m/lhm_actions/action-templates/actions/action-codeql@1.0.0
         with:
           codeql-language: java-kotlin
           codeql-buildmode: ${{ inputs.java-buildmode }}
