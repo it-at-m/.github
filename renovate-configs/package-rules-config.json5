@@ -6,19 +6,19 @@
       "description": "Limit dependencies directly related to Node to latest version on company machines",
       "matchDatasources": ["npm"],
       "matchPackageNames": ["@tsconfig/node-lts", "@types/node"],
-      "allowedVersions": "<=22.11.0"
+      "allowedVersions": "<=22.14.0"
     },
     {
       "description": "Limit Keycloak version in Docker stacks to latest version in company infrastructure, might slighty differ due to some RedHat KeyCloak versions not being available as Docker image",
       "matchDatasources": ["docker"],
       "matchPackageNames": ["quay.io/keycloak/keycloak"],
-      "allowedVersions": "<=20.0.5"
+      "allowedVersions": "<=26.0"
     },
     {
       "description": "Limit Postgres version in Docker stacks to latest version in company infrastructure",
       "matchDatasources": ["docker"],
       "matchPackageNames": ["postgres"],
-      "allowedVersions": "<=16.4"
+      "allowedVersions": "<=17.4"
     }
   ]
 }
