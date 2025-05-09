@@ -18,6 +18,8 @@ allow_dependencies_licenses:
   - pkg:npm/node-forge
   # false positive: jsonify does not include a LICENSE file but states itself as "public domain" (see https://github.com/ljharb/jsonify?tab=readme-ov-file#license)
   - pkg:npm/jsonify
+  # false positive: @fontsource/roboto is based on OFL-1.1, but is marked as "Apache-2.0 AND NOASSERTION AND OFL-1.1" and this fails with "Invalid SPDX License"
+  - pkg:npm/@fontsource/roboto
   # false positive: only used while build but not part of the software
   - pkg:maven/com.puppycrawl.tools/checkstyle
   # false positive: couldn't parse license but is Apache License 2.0
