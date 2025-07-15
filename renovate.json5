@@ -29,7 +29,7 @@
   customManagers: [
     {
       customType: "regex",
-      description: "Update version variables in YAML files",
+      description: "Update version variables in YAML files - mainly used for .gitlab-ci.yaml.",
       managerFilePatterns: ["/\\.y[a]?ml$/", "/\\.y[a]?ml\\.tpl$/"],
       matchStrings: [
         "# renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)(?: versioning=(?<versioning>.+?))?(?: extractVersion=(?<extractVersion>.+?))?\\s+(.*?):\\s?(?<currentValue>.+)",
