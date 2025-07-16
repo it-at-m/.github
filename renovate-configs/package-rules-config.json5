@@ -1,24 +1,41 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "description": "Renovate configuration for package rules to ignore packages which are dependent on internal infrastructure and tooling. Manual updates are necessary when new versions get rolled out.",
-  "packageRules": [
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  description: "Renovate configuration for package rules to ignore packages which are dependent on internal infrastructure and tooling. Manual updates are necessary when new versions get rolled out.",
+  packageRules: [
     {
-      "description": "Limit dependencies directly related to Node to latest version on company machines",
-      "matchDatasources": ["npm"],
-      "matchPackageNames": ["@tsconfig/node-lts", "@types/node"],
-      "allowedVersions": "<=22.14.0"
+      description: "Limit dependencies directly related to Node to latest version on company machines",
+      matchDatasources: ["npm"],
+      matchPackageNames: ["@tsconfig/node-lts", "@types/node"],
+      allowedVersions: "<=22.14.0",
     },
     {
-      "description": "Limit Keycloak version in Docker stacks to latest version in company infrastructure, might slighty differ due to some RedHat KeyCloak versions not being available as Docker image",
-      "matchDatasources": ["docker"],
-      "matchPackageNames": ["quay.io/keycloak/keycloak"],
-      "allowedVersions": "<=26.0"
+      description: "Limit Keycloak version in Docker stacks to latest version in company infrastructure, might slighty differ due to some RedHat KeyCloak versions not being available as Docker image",
+      matchDatasources: ["docker"],
+      matchPackageNames: ["quay.io/keycloak/keycloak"],
+      allowedVersions: "<=26.0",
     },
     {
-      "description": "Limit Postgres version in Docker stacks to latest version in company infrastructure",
-      "matchDatasources": ["docker"],
-      "matchPackageNames": ["postgres"],
-      "allowedVersions": "<=17.4"
-    }
-  ]
+      description: "Limit Postgres version in Docker stacks to latest version in company infrastructure",
+      matchDatasources: ["docker"],
+      matchPackageNames: ["postgres"],
+      allowedVersions: "<=17.4",
+    },
+  ],
+  "helm-values": {
+    // Target **all** `*values*.yaml*  Files
+    managerFilePatterns: ["/(^|/)[-|\\w]*values[-|\\w]*\\.ya?ml$/"],
+  },
+  customManagers: [
+    {
+      customType: "regex",
+      description: "Update version variables in YAML files - mainly used for .gitlab-ci.yaml.",
+      managerFilePatterns: ["/\\.y[a]?ml$/", "/\\.y[a]?ml\\.tpl$/"],
+      matchStrings: [
+        "# renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)(?: versioning=(?<versioning>.+?))?(?: extractVersion=(?<extractVersion>.+?))?\\s+(.*?):\\s?(?<currentValue>.+)",
+        "# renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)(?: versioning=(?<versioning>.+?))?(?: extractVersion=(?<extractVersion>.+?))?\\s+(.*?):\\s(\"|')(?<currentValue>.+)(\"|')",
+      ],
+      extractVersionTemplate: "{{#if extractVersion}}{{{extractVersion}}}{{else}}^v?(?<version>.+)${{/if}}",
+      versioningTemplate: "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}",
+    },
+  ],
 }
