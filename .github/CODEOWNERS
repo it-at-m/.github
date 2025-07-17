@@ -7,6 +7,9 @@
 /workflow-templates/ @it-at-m/sps
 /workflow-configs/ @it-at-m/sps
 
+# Renovate Configs
+/renovate-configs/ @it-at-m/sps @it-at-m/refarch-maintainer
+
 # Open Source-related files
 /profile/ @it-at-m/itm-admin
 

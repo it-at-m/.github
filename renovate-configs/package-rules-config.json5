@@ -20,5 +20,22 @@
       "matchPackageNames": ["postgres"],
       "allowedVersions": "<=17.4"
     }
-  ]
+  ],
+  "helm-values": {
+    // Target **all** `*values*.yaml*  Files
+    managerFilePatterns: ["/(^|/)[-|\\w]*values[-|\\w]*\\.ya?ml$/"],
+  },
+  customManagers: [
+    {
+      customType: "regex",
+      description: "Update version variables in YAML files - mainly used for .gitlab-ci.yaml.",
+      managerFilePatterns: ["/\\.y[a]?ml$/", "/\\.y[a]?ml\\.tpl$/"],
+      matchStrings: [
+        "# renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)(?: versioning=(?<versioning>.+?))?(?: extractVersion=(?<extractVersion>.+?))?\\s+(.*?):\\s?(?<currentValue>.+)",
+        "# renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)(?: versioning=(?<versioning>.+?))?(?: extractVersion=(?<extractVersion>.+?))?\\s+(.*?):\\s(\"|')(?<currentValue>.+)(\"|')",
+      ],
+      extractVersionTemplate: "{{#if extractVersion}}{{{extractVersion}}}{{else}}^v?(?<version>.+)${{/if}}",
+      versioningTemplate: "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}",
+    },
+  ],
 }
