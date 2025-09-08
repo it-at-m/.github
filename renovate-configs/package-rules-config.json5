@@ -19,7 +19,17 @@
       "matchDatasources": ["docker"],
       "matchPackageNames": ["postgres"],
       "allowedVersions": "<=17.4"
-    }
+    },
+    {
+      matchDatasources: ["docker"],
+      excludePackagePatterns: ["^{{ .Values.quayurl }}"],
+      enabled: false,
+    },
+    {
+      matchManagers: ["gitlabci"],
+      matchDatasources: ["docker"],
+      enabled: false,
+    },
   ],
   "helm-values": {
     // Target **all** `*values*.yaml*  Files
