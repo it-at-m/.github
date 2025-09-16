@@ -27,6 +27,7 @@
       enabled: false,
     },
     {
+     "description": "Automerge non-major updates", 
       matchManagers: ["gitlabci"],
       matchDatasources: ["docker"],
       enabled: false,
