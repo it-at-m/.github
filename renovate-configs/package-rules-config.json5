@@ -22,6 +22,7 @@
     },
     {
       matchDatasources: ["docker"],
+       "description": "Automerge non-major updates",
       excludePackagePatterns: ["^{{ .Values.quayurl }}"],
       enabled: false,
     },
