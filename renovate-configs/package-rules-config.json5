@@ -22,7 +22,7 @@
     },
     {
       matchDatasources: ["docker"],
-       "description": "Automerge non-major updates",
+       "description": "Disable renovate for helm registry url {{ .Values.quayurl }}",
       excludePackagePatterns: ["^{{ .Values.quayurl }}"],
       enabled: false,
     },
