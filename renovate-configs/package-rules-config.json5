@@ -28,7 +28,6 @@
     },
     {
      "description": "Disable pin digest for .gitlab-ci.yml and values-*.yaml", 
-      matchManagers: ["gitlabci"],
       matchDatasources: ["docker"],
       enabled: false,
     },
