@@ -19,23 +19,11 @@
       "matchDatasources": ["docker"],
       "matchPackageNames": ["postgres"],
       "allowedVersions": "<=17.4"
-    },
-    {
-      "description": "Disable renovate for helm registry url {{ .Values.quayurl }}",
-      "matchDatasources": ["docker"],
-      "excludePackagePatterns": ["^{{ .Values.quayurl }}"],
-      "enabled": false,
-    },
-    {
-      "description": "Disable pin digest for .gitlab-ci.yml and values-*.yaml",
-      "matchDatasources": ["docker"],
-      "matchFileNames":[".gitlab-ci.yml","/(^|\\/)[-|\\w]*values[-|\\w]*\\.ya?ml$/"],
-      "enabled": false,
-    },
+    }
   ],
   "helm-values": {
     // Target **all** `*values*.yaml*  Files
-    managerFilePatterns: ["/(^|\\/)[-|\\w]*values[-|\\w]*\\.ya?ml$/"],
+    managerFilePatterns: ["/(^|/)[-|\\w]*values[-|\\w]*\\.ya?ml$/"],
   },
   customManagers: [
     {
