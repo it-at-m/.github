@@ -21,16 +21,16 @@
       "allowedVersions": "<=17.4"
     },
     {
-      matchDatasources: ["docker"],
-       "description": "Disable renovate for helm registry url {{ .Values.quayurl }}",
-      excludePackagePatterns: ["^{{ .Values.quayurl }}"],
-      enabled: false,
+      "description": "Disable renovate for helm registry url {{ .Values.quayurl }}",
+      "matchDatasources": ["docker"],
+      "excludePackagePatterns": ["^{{ .Values.quayurl }}"],
+      "enabled": false,
     },
     {
-     "description": "Disable pin digest for .gitlab-ci.yml and values-*.yaml", 
-      matchDatasources: ["docker"],
+      "description": "Disable pin digest for .gitlab-ci.yml and values-*.yaml",
+      "matchDatasources": ["docker"],
       "matchFileNames":[".gitlab-ci.yml","/(^|\\/)[-|\\w]*values[-|\\w]*\\.ya?ml$/"],
-      enabled: false,
+      "enabled": false,
     },
   ],
   "helm-values": {
