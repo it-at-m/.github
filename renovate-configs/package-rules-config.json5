@@ -19,7 +19,13 @@
       "matchDatasources": ["docker"],
       "matchPackageNames": ["postgres"],
       "allowedVersions": "<=17.4"
-    }
+    },
+    {
+      matchDatasources: ["docker"],
+      "description": "Disable renovate for helm registry url {{ .Values.quayurl }}",
+      excludePackagePatterns: ["^{{ .Values.quayurl }}"],
+      enabled: false,
+    },
   ],
   "helm-values": {
     // Target **all** `*values*.yaml*  Files
