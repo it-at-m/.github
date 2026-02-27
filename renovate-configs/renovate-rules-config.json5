@@ -28,7 +28,7 @@
     "helpers:pinGitHubActionDigestsToSemver", // enabled pinning the action digest with a semantic version comment
 
     // npm Presets (https://docs.renovatebot.com/presets-npm/)
-    "npm:unpublishSafe", // used to make sure updates are only done after the npm package is "stable" (at least for 3 days)
+    "security:minimumReleaseAgeNpm", // used to make sure updates are only done after the npm package is "stable" (at least for 3 days)
 
     // Schedule presets (https://docs.renovatebot.com/presets-schedule/)
     "schedule:weekly", // Renovatebot will search weekly for available dependency updates
