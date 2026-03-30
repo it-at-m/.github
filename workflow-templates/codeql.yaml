@@ -9,7 +9,7 @@ on:
 
 jobs:
   codeql:
-    uses: it-at-m/.github/.github/workflows/codeql.yml@main
+    uses: it-at-m/.github/.github/workflows/codeql.yml@7f990ad0bffd7ef9651f9c63746ae772790f2608 # main
     with:
       analyze-java: true
       # java-buildmode: "autobuild" # e.g. none, autobuild (default), manual
