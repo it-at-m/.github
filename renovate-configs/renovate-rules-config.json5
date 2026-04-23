@@ -28,7 +28,8 @@
     "helpers:pinGitHubActionDigestsToSemver", // enabled pinning the action digest with a semantic version comment
 
     // Schedule presets (https://docs.renovatebot.com/presets-schedule/)
-    "schedule:weekly", // Renovatebot will search weekly for available dependency updates
+    "schedule:weekly", // search weekly for available dependency updates
+    "schedule:automergeNonOfficeHours", // automerge only in non office hours (10PM - 5AM on weekdays, always on weekend)
 
     // Security presets (https://docs.renovatebot.com/presets-security/)
     "security:openssf-scorecard", // show OpenSSF badge on pull requests to evaluate security health metrics for dependencies
