@@ -29,7 +29,7 @@ jobs:
       TZ: Europe/Berlin # timezone
     steps:
       - id: maven-release-step
-        uses: it-at-m/lhm_actions/action-templates/actions/action-maven-release@acb09213786b76dd7aa52ec1d901390d28c60eb0 # v1.0.29
+        uses: it-at-m/lhm_actions/action-templates/actions/action-maven-release@7768a71df3e9e50ca240e2a69a31c4910e1a8ea0 # v1.0.31
         with:
           app-path: "/${{ github.event.inputs.app-path }}"
           releaseVersion: "${{ github.event.inputs.releaseVersion }}"
@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: release-maven
     steps:
-      - uses: it-at-m/lhm_actions/action-templates/actions/action-build-image@acb09213786b76dd7aa52ec1d901390d28c60eb0 # v1.0.29
+      - uses: it-at-m/lhm_actions/action-templates/actions/action-build-image@7768a71df3e9e50ca240e2a69a31c4910e1a8ea0 # v1.0.31
         with:
           path: "${{ github.event.inputs.app-path }}"
           image-name: "${{ github.event.inputs.app-path }}"
@@ -57,7 +57,7 @@ jobs:
     steps:
       - name: Create GitHub Release
         id: create_release
-        uses: it-at-m/lhm_actions/action-templates/actions/action-create-github-release@acb09213786b76dd7aa52ec1d901390d28c60eb0 # v1.0.29
+        uses: it-at-m/lhm_actions/action-templates/actions/action-create-github-release@7768a71df3e9e50ca240e2a69a31c4910e1a8ea0 # v1.0.31
         with:
           artifact-name: ${{ needs.release-maven.outputs.ARTIFACT_NAME }}
           tag-name: ${{ needs.release-maven.outputs.MVN_ARTIFACT_ID }}-${{ github.event.inputs.releaseVersion }}

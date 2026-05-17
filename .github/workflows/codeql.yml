@@ -80,7 +80,7 @@ jobs:
       matrix:
         build-path: ${{ fromJSON(inputs.java-build-paths) }}
     steps:
-      - uses: it-at-m/lhm_actions/action-templates/actions/action-codeql@acb09213786b76dd7aa52ec1d901390d28c60eb0 # v1.0.29
+      - uses: it-at-m/lhm_actions/action-templates/actions/action-codeql@7768a71df3e9e50ca240e2a69a31c4910e1a8ea0 # v1.0.31
         with:
           codeql-language: java-kotlin
           codeql-buildmode: ${{ inputs.java-buildmode }}
@@ -93,7 +93,7 @@ jobs:
     needs: check-changes
     if: inputs.analyze-javascript-typescript-vue && (github.ref_name == 'main' || needs.check-changes.outputs.javascript-typescript-vue == 'true')
     steps:
-      - uses: it-at-m/lhm_actions/action-templates/actions/action-codeql@acb09213786b76dd7aa52ec1d901390d28c60eb0 # v1.0.29
+      - uses: it-at-m/lhm_actions/action-templates/actions/action-codeql@7768a71df3e9e50ca240e2a69a31c4910e1a8ea0 # v1.0.31
         with:
           codeql-language: javascript-typescript
           codeql-query: ${{ inputs.analysis-query }}
@@ -103,7 +103,7 @@ jobs:
     needs: check-changes
     if: inputs.analyze-python && (github.ref_name == 'main' || needs.check-changes.outputs.python == 'true')
     steps:
-      - uses: it-at-m/lhm_actions/action-templates/actions/action-codeql@acb09213786b76dd7aa52ec1d901390d28c60eb0 # v1.0.29
+      - uses: it-at-m/lhm_actions/action-templates/actions/action-codeql@7768a71df3e9e50ca240e2a69a31c4910e1a8ea0 # v1.0.31
         with:
           codeql-language: python
           codeql-query: ${{ inputs.analysis-query }}
