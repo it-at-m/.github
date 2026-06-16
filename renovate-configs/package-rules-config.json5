@@ -3,6 +3,17 @@
   "description": "Renovate configuration for package rules to ignore packages which are dependent on internal infrastructure and tooling. Manual updates are necessary when new versions get rolled out.",
   "packageRules": [
     {
+      "description": "Disable major and minor updates for peer dependency overrides as compatibility is almost always not given",
+      "matchDepTypes": ["overrides"],
+      "matchUpdateTypes": ["major", "minor"],
+      "enabled": false
+    },
+    {
+      "description": "Disable automerge for peer dependency overrides to draw attention to them still existing (should be reviewed when root dependency got updates)",
+      "matchDepTypes": ["overrides"],
+      "automerge": false
+    },
+    {
       "description": "Limit dependencies directly related to Node to latest version on company machines",
       "matchDatasources": ["npm"],
       "matchPackageNames": ["@tsconfig/node-lts", "@types/node"],
