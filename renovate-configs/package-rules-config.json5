@@ -23,13 +23,13 @@
       "description": "Limit Keycloak version in Docker stacks to latest version in company infrastructure, might slighty differ due to some RedHat KeyCloak versions not being available as Docker image",
       "matchDatasources": ["docker"],
       "matchPackageNames": ["quay.io/keycloak/keycloak", "keycloak/keycloak"],
-      "allowedVersions": "<=26.2"
+      "allowedVersions": "<=26.6"
     },
     {
       "description": "Limit Postgres version in Docker stacks to latest version in company infrastructure",
       "matchDatasources": ["docker"],
       "matchPackageNames": ["postgres"],
-      "allowedVersions": "<=17.4"
+      "allowedVersions": "<=18.4"
     }
   ],
   "helm-values": {
