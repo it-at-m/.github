@@ -14,6 +14,18 @@
       "automerge": false
     },
     {
+      "description": "Limit Node.js to reflect latest version on company machines",
+      "matchDepTypes": ["engines"],
+      "matchPackageNames": ["node"],
+      "allowedVersions": "<=26.13"
+    },
+    {
+      "description": "Limit NPM to reflect latest version on company machines",
+      "matchDepTypes": ["engines"],
+      "matchPackageNames": ["npm"],
+      "allowedVersions": "<=11.20"
+    },
+    {
       "description": "Limit dependencies directly related to Node to latest version on company machines",
       "matchDatasources": ["npm"],
       "matchPackageNames": ["@tsconfig/node-lts", "@types/node"],
